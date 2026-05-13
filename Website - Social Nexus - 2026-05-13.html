@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Social Nexus — Building Community That Lasts</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #111008;
+      --bg-warm: #18160d;
+      --bg-card: #1e1b10;
+      --cream: #f2ead8;
+      --cream-muted: #b8ae96;
+      --amber: #c9943a;
+      --amber-light: #e0b060;
+      --amber-dim: rgba(201, 148, 58, 0.12);
+      --border: rgba(242, 234, 216, 0.08);
+      --border-amber: rgba(201, 148, 58, 0.25);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--cream);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* GRAIN OVERLAY */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 100;
+      opacity: 0.4;
+    }
+
+    /* NAVIGATION */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      padding: 1.5rem 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(to bottom, rgba(17,16,8,0.95) 0%, transparent 100%);
+      backdrop-filter: blur(0px);
+      transition: backdrop-filter 0.3s;
+    }
+
+    nav.scrolled {
+      backdrop-filter: blur(16px);
+      background: rgba(17,16,8,0.9);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Fraunces', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--cream);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+
+    .nav-logo span {
+      color: var(--amber);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--cream-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--cream); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 8rem 4rem 6rem;
+      position: relative;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero-bg-glow {
+      position: absolute;
+      top: 30%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 800px;
+      height: 500px;
+      background: radial-gradient(ellipse at center, rgba(201,148,58,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.2s forwards;
+    }
+
+    .hero h1 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(3rem, 7vw, 6.5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      max-width: 900px;
+      margin-bottom: 1.75rem;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.35s forwards;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--amber-light);
+    }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      font-weight: 300;
+      color: var(--cream-muted);
+      max-width: 540px;
+      margin-bottom: 3.5rem;
+      line-height: 1.8;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.5s forwards;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 100%;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.65s forwards;
+    }
+
+    .btn-primary {
+      background: var(--amber);
+      color: var(--bg);
+      padding: 0.85rem 2rem;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      min-width: 200px;
+      text-align: center;
+    }
+
+    .btn-primary:hover {
+      background: var(--amber-light);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--cream);
+      padding: 0.85rem 2rem;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1px solid var(--border-amber);
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s, transform 0.2s;
+      min-width: 200px;
+      text-align: center;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--amber);
+      color: var(--amber-light);
+      transform: translateY(-1px);
+    }
+
+    .hero-scroll-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 0;
+      right: 0;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--cream-muted);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      opacity: 0;
+      animation: fadeUp 1s ease 1.2s forwards;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--amber), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    /* DIVIDER */
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: var(--border);
+      position: relative;
+    }
+
+    .divider::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 1px;
+      background: var(--amber);
+    }
+
+    /* SECTION BASE */
+    section {
+      padding: 7rem 4rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    section.full-width {
+      max-width: none;
+      padding: 7rem 0;
+    }
+
+    .section-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 4rem;
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 1.25rem;
+      display: block;
+    }
+
+    .section-heading {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2rem, 4vw, 3.25rem);
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-heading em {
+      font-style: italic;
+      color: var(--amber-light);
+    }
+
+    /* MISSION */
+    .mission-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+
+    .mission-body {
+      font-size: 1.05rem;
+      color: var(--cream-muted);
+      line-height: 1.85;
+    }
+
+    .mission-body p + p {
+      margin-top: 1.25rem;
+    }
+
+    .mission-stats {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .stat-item {
+      border-left: 2px solid var(--amber);
+      padding-left: 1.5rem;
+    }
+
+    .stat-number {
+      font-family: 'Fraunces', serif;
+      font-size: 2.75rem;
+      font-weight: 300;
+      color: var(--cream);
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: var(--cream-muted);
+      font-weight: 300;
+    }
+
+    .stat-source {
+      font-size: 0.7rem;
+      color: rgba(184,174,150,0.45);
+      font-weight: 300;
+      margin-top: 0.35rem;
+      letter-spacing: 0.02em;
+    }
+
+    sup {
+      font-size: 0.6rem;
+      color: var(--amber);
+      vertical-align: super;
+      line-height: 0;
+    }
+
+    .footnotes {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .footnotes p {
+      font-size: 0.72rem;
+      color: rgba(184,174,150,0.45);
+      line-height: 1.8;
+      font-weight: 300;
+    }
+
+    .footnotes a {
+      color: rgba(184,174,150,0.45);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .footnotes a:hover {
+      color: var(--cream-muted);
+    }
+
+    /* APPS */
+    .apps-section {
+      background: var(--bg-warm);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .apps-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .apps-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .app-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 3rem;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .app-card p {
+      flex: 1;
+    }
+
+    .app-card:hover {
+      border-color: var(--border-amber);
+      transform: translateY(-3px);
+    }
+
+    .app-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(to right, var(--amber), transparent);
+    }
+
+    .app-card-badge {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--amber);
+      border: 1px solid var(--border-amber);
+      padding: 0.3rem 0.75rem;
+      margin-bottom: 2rem;
+    }
+
+    .app-icon {
+      width: 56px;
+      height: 56px;
+      background: var(--amber-dim);
+      border: 1px solid var(--border-amber);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      font-size: 1.5rem;
+    }
+
+    .app-card h3 {
+      font-family: 'Fraunces', serif;
+      font-size: 1.75rem;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+      color: var(--cream);
+    }
+
+    .app-card p {
+      font-size: 0.95rem;
+      color: var(--cream-muted);
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+
+    .email-capture {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: auto;
+    }
+
+    .email-capture-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--cream-muted);
+    }
+
+    .email-capture-row {
+      display: flex;
+      gap: 0;
+    }
+
+    .email-capture input[type="email"] {
+      flex: 1;
+      background: rgba(242,234,216,0.05);
+      border: 1px solid var(--border);
+      border-right: none;
+      padding: 0.75rem 1rem;
+      color: var(--cream);
+      font-family: 'Jost', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 300;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .email-capture input[type="email"]::placeholder {
+      color: rgba(184,174,150,0.4);
+    }
+
+    .email-capture input[type="email"]:focus {
+      border-color: var(--amber);
+    }
+
+    .email-capture button {
+      background: var(--amber);
+      border: 1px solid var(--amber);
+      color: var(--bg);
+      padding: 0.75rem 1.25rem;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.2s;
+    }
+
+    .email-capture button:hover {
+      background: var(--amber-light);
+    }
+
+    .success-msg {
+      display: none;
+      font-size: 0.85rem;
+      color: var(--amber-light);
+      padding: 0.5rem 0;
+    }
+
+    /* VALUES */
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3rem;
+      margin-top: 4rem;
+    }
+
+    .value-item {
+      position: relative;
+      padding-top: 1.5rem;
+    }
+
+    .value-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 32px;
+      height: 1px;
+      background: var(--amber);
+    }
+
+    .value-item h4 {
+      font-family: 'Fraunces', serif;
+      font-size: 1.2rem;
+      font-weight: 400;
+      margin-bottom: 0.75rem;
+      color: var(--cream);
+    }
+
+    .value-item p {
+      font-size: 0.9rem;
+      color: var(--cream-muted);
+      line-height: 1.8;
+    }
+
+    /* CONTACT */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 6rem;
+      align-items: start;
+    }
+
+    .contact-intro h2 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(1.75rem, 3vw, 2.75rem);
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 1.25rem;
+    }
+
+    .contact-intro h2 em {
+      font-style: italic;
+      color: var(--amber-light);
+    }
+
+    .contact-intro p {
+      font-size: 0.95rem;
+      color: var(--cream-muted);
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+
+    .contact-detail {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .contact-detail-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.9rem;
+      color: var(--cream-muted);
+    }
+
+    .contact-detail-item span:first-child {
+      color: var(--amber);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      min-width: 80px;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .form-group label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--cream-muted);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: rgba(242,234,216,0.04);
+      border: 1px solid var(--border);
+      padding: 0.85rem 1rem;
+      color: var(--cream);
+      font-family: 'Jost', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 300;
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: rgba(184,174,150,0.35);
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--amber);
+    }
+
+    .form-group select {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c9943a' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      padding-right: 2.5rem;
+    }
+
+    .form-group select option {
+      background: var(--bg-card);
+      color: var(--cream);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--bg-warm);
+      border-top: 1px solid var(--border);
+      padding: 3rem 4rem;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .footer-logo {
+      font-family: 'Fraunces', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--cream);
+      text-decoration: none;
+    }
+
+    .footer-logo span { color: var(--amber); }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      font-size: 0.8rem;
+      color: var(--cream-muted);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--cream); }
+
+    .footer-copy {
+      font-size: 0.78rem;
+      color: rgba(184,174,150,0.4);
+      letter-spacing: 0.03em;
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.4; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(1.1); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* RESPONSIVE */
+    @media (min-width: 901px) {
+      .btn-primary, .btn-outline { width: 220px; }
+    }
+
+    @media (max-width: 900px) {
+      nav { padding: 1.25rem 2rem; }
+      nav .nav-links { display: none; }
+      .hero { padding: 5rem 2rem 5rem; }
+      section { padding: 5rem 2rem; }
+      .section-inner { padding: 0 2rem; }
+      .mission-grid,
+      .apps-grid,
+      .contact-grid,
+      .values-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .form-row { grid-template-columns: 1fr; }
+      footer { padding: 2.5rem 2rem; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav id="nav">
+    <a href="#" class="nav-logo">Social<span>Nexus</span></a>
+    <ul class="nav-links">
+      <li><a href="#mission">Mission</a></li>
+      <li><a href="#apps">Our Apps</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero" id="home">
+    <div class="hero-bg-glow"></div>
+    <span class="hero-eyebrow">Social Nexus — Est. 2025</span>
+    <h1>Where <em>Real</em> Connections<br>Are Built</h1>
+    <p class="hero-sub">We bring people together in real life — forming meaningful communities, pursuing personal growth, and showing up for one another.<br>Mobile apps are how we make it happen.</p>
+    <div class="hero-cta-group">
+      <a href="#apps" class="btn-primary">Explore Our Apps</a>
+      <a href="#contact" class="btn-outline">Get In Touch</a>
+    </div>
+    <div class="hero-scroll-hint">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- MISSION -->
+  <section id="mission">
+    <div class="mission-grid">
+      <div class="reveal">
+        <span class="section-label">Our Mission</span>
+        <h2 class="section-heading">Community is one of life's greatest<em> gifts</em></h2>
+        <div class="mission-body">
+          <p>At Social Nexus, we believe that the quality of your life is shaped by the quality of your relationships. Belonging to a group of people who know you, challenge you, and celebrate you — in person, face to face — that is something worth building toward.</p>
+          <p>Communities deserve the structure and tools to truly thrive — and that is exactly what we build toward. The technology is the foundation, but the real magic happens when people actually show up for one another. From faith-based groups and fitness crews to book clubs, accountability circles, and professional networks — the goal is always the same: people, together, in real life.</p>
+          <p>One belief grounds everything we do: intentional, real-world human connection makes everything better.</p>
+        </div>
+      </div>
+      <div class="mission-stats reveal reveal-delay-2">
+        <div class="stat-item">
+          <div class="stat-number">30M+</div>
+          <div class="stat-label">Adults in the US motivated to participate in intentional community groups<sup>1</sup></div>
+          <div class="stat-source">Pew Research Center (2024) & U.S. Census Bureau — derived estimate based on population and group participation data</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">50%</div>
+          <div class="stat-label">Greater likelihood of living longer for people with strong social connections<sup>2</sup></div>
+          <div class="stat-source">Harvard T.H. Chan School of Public Health — also cited by the U.S. Surgeon General's Advisory on Social Connection, 2023</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">½</div>
+          <div class="stat-label">The number of Americans with 6 or more close friends has fallen by half since 1990<sup>3</sup></div>
+          <div class="stat-source">American Perspectives Survey, Survey Center on American Life — 2021</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="values-grid">
+      <div class="value-item reveal reveal-delay-1">
+        <h4>Authenticity</h4>
+        <p>Real relationships, not curated performance. The space to show up exactly as you are — no filters, no highlights reel, just people being genuine with one another.</p>
+      </div>
+      <div class="value-item reveal reveal-delay-2">
+        <h4>Accountability</h4>
+        <p>Growth happens in community. Real accountability means someone showing up when you say you will — and calling you out, with care, when you don't. That kind of relationship changes people.</p>
+      </div>
+      <div class="value-item reveal reveal-delay-3">
+        <h4>Belonging</h4>
+        <p>Everyone deserves a group of people who truly know them — and who show up in person. We build the infrastructure that makes real-world belonging possible, for everyone.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTNOTES -->
+  <section style="padding-top: 0; padding-bottom: 3rem;">
+    <div class="footnotes reveal">
+      <p><sup>1</sup> Derived estimate. Population base from U.S. Census Bureau (2024–2025) and Pew Research Center Mobile Fact Sheet (2024), which shows 97–98% smartphone adoption among adults aged 18–49. Group participation rate of ~30% applied based on Survey Center on American Life data on involvement in faith-based, fitness, professional, and support groups. <a href="https://www.pewresearch.org/internet/fact-sheet/mobile/" target="_blank" rel="noopener">pewresearch.org</a> · <a href="https://www.worldometers.info/demographics/us-demographics/" target="_blank" rel="noopener">worldometers.info</a></p>
+      <p><sup>2</sup> Holt-Lunstad, J. et al. (2010). Social relationships and mortality risk: a meta-analytic review of 148 studies. Presented at Harvard T.H. Chan School of Public Health, Lee Kum Sheung Center for Health and Happiness, October 2023. Also cited in the U.S. Surgeon General's Advisory on the Healing Effects of Social Connection and Community (2023). <a href="https://hsph.harvard.edu/health-happiness/news/from-loneliness-to-social-connection-lessons-from-research-and-a-global-pandemic/" target="_blank" rel="noopener">hsph.harvard.edu</a></p>
+      <p><sup>3</sup> Cox, D. (2021). The state of American friendship: Change, challenges, and loss. <em>Survey Center on American Life, American Enterprise Institute.</em> <a href="https://www.americansurveycenter.org/research/the-state-of-american-friendship-change-challenges-and-loss/" target="_blank" rel="noopener">americansurveycenter.org</a></p>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- APPS -->
+  <section class="full-width apps-section" id="apps">
+    <div class="section-inner">
+      <div class="apps-header reveal">
+        <span class="section-label">Our Portfolio</span>
+        <h2 class="section-heading">Apps Built for <em>Real</em> People</h2>
+        <p style="color: var(--cream-muted); max-width: 520px; margin: 0 auto; font-size: 0.95rem; line-height: 1.8;">Each Social Nexus app is purpose-built for a specific community — designed to get people off their screens and into the same room. Be the first to know when they launch.</p>
+      </div>
+
+      <div class="apps-grid">
+
+        <!-- Men's Group -->
+        <div class="app-card reveal reveal-delay-1">
+          <span class="app-card-badge">Coming Soon</span>
+          <div class="app-icon">⚡</div>
+          <h3>Men's Group</h3>
+          <p>Your community of men — faith-based groups, fitness crews, book clubs, veteran circles, and professional networks. Real in-person meetings, shared goals, mutual accountability. Show up. Grow together.</p>
+          <div class="email-capture">
+            <span class="email-capture-label">Notify me at launch</span>
+            <div class="email-capture-row">
+              <input type="email" placeholder="your@email.com" id="mg-email" />
+              <button onclick="handleCapture('mg')">Notify Me</button>
+            </div>
+            <div class="success-msg" id="mg-success">✓ You're on the list. We'll be in touch.</div>
+          </div>
+        </div>
+
+        <!-- Women's Group -->
+        <div class="app-card reveal reveal-delay-2">
+          <span class="app-card-badge">Coming Soon</span>
+          <div class="app-icon">✦</div>
+          <h3>Women's Group</h3>
+          <p>A sacred and supportive space for women to connect, share, and grow together — built for faith communities, book clubs, wellness groups, professional circles, and beyond. From shared goals to in-person gatherings, every feature is designed to bring women closer in real life.</p>
+          <div class="email-capture">
+            <span class="email-capture-label">Notify me at launch</span>
+            <div class="email-capture-row">
+              <input type="email" placeholder="your@email.com" id="wg-email" />
+              <button onclick="handleCapture('wg')">Notify Me</button>
+            </div>
+            <div class="success-msg" id="wg-success">✓ You're on the list. We'll be in touch.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-grid">
+      <div class="reveal">
+        <span class="section-label">Bring It To Your Community</span>
+        <h2 class="contact-intro h2" style="font-family:'Fraunces',serif; font-size:clamp(1.75rem,3vw,2.75rem); font-weight:300; letter-spacing:-0.02em; line-height:1.2; margin-bottom:1.25rem;">Let's build something <em>meaningful</em> together</h2>
+        <p style="font-size:0.95rem; color:var(--cream-muted); line-height:1.8; margin-bottom:2rem;">We partner with churches and faith-based organizations, fitness networks, veteran organizations, book clubs, and mission-aligned groups to help their communities thrive in real life. If that sounds like you, we'd love to connect.</p>
+        <div class="contact-detail">
+          <div class="contact-detail-item">
+            <span>Email</span>
+            <span>hello@socialnexus.group</span>
+          </div>
+          <div class="contact-detail-item">
+            <span>Entity</span>
+            <span>Social Nexus LLC</span>
+          </div>
+        </div>
+      </div>
+
+      <form class="contact-form reveal reveal-delay-2" onsubmit="handleContact(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" placeholder="John" required />
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" placeholder="Smith" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" placeholder="you@yourorganization.com" required />
+        </div>
+        <div class="form-group">
+          <label>Organization Type</label>
+          <select required>
+            <option value="" disabled selected>Select one...</option>
+            <option>Church</option>
+            <option>Faith-Based Organization</option>
+            <option>Fitness Community</option>
+            <option>Veterans Group</option>
+            <option>Professional Network</option>
+            <option>Book Club</option>
+            <option>Investor / Partner</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Organization Name <span style="color:var(--cream-muted); font-weight:300; text-transform:none; letter-spacing:0;">(optional)</span></label>
+          <input type="text" placeholder="e.g. Your Organization" />
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea placeholder="Tell us about your community and how we can help..." required></textarea>
+        </div>
+        <button type="submit" class="btn-primary" style="width:100%; text-align:center;" id="contact-btn">Send Message</button>
+        <div class="success-msg" id="contact-success" style="display:none; font-size:0.9rem;">✓ Message received. We'll be in touch shortly.</div>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <a href="#" class="footer-logo">Social<span>Nexus</span></a>
+      <div class="footer-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Community Guidelines</a>
+        <a href="#apps">Our Apps</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <span class="footer-copy">© 2025 Social Nexus LLC — Arizona</span>
+    </div>
+  </footer>
+
+  <script>
+    // Nav scroll effect
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => observer.observe(el));
+
+    // Email capture
+    function handleCapture(app) {
+      const input = document.getElementById(app + '-email');
+      const success = document.getElementById(app + '-success');
+      if (!input.value || !input.value.includes('@')) {
+        input.style.borderColor = '#c0392b';
+        setTimeout(() => input.style.borderColor = '', 1500);
+        return;
+      }
+      input.style.display = 'none';
+      input.nextElementSibling.style.display = 'none';
+      success.style.display = 'block';
+    }
+
+    // Contact form
+    function handleContact(e) {
+      e.preventDefault();
+      const btn = document.getElementById('contact-btn');
+      const success = document.getElementById('contact-success');
+      btn.textContent = 'Sending...';
+      btn.disabled = true;
+      setTimeout(() => {
+        btn.style.display = 'none';
+        success.style.display = 'block';
+      }, 800);
+    }
+
+    // Smooth scroll for nav links
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
