@@ -1090,19 +1090,16 @@
       btn.textContent = 'Sending...';
       btn.disabled = true;
 
-      const fullMessage = orgName
-        ? `Organization: ${orgName}\n\n${message}`
-        : message;
-
       const { error } = await snClient
         .from('website_contacts')
         .insert({
-          first_name:     firstName,
-          last_name:      lastName,
-          email:          email,
-          community_type: communityType,
-          message:        fullMessage,
-          source:         'partner_inquiry'
+          first_name:        firstName,
+          last_name:         lastName,
+          email:             email,
+          community_type:    communityType,
+          organization_name: orgName || null,
+          message:           message || null,
+          source:            'partner_inquiry'
         });
 
       if (error) {
