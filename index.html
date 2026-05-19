@@ -860,26 +860,17 @@
 
     <div class="values-grid">
       <div class="value-item reveal reveal-delay-1">
-        <h4>Authenticity</h4>
-        <p>Real relationships, not curated performance. The space to show up exactly as you are — no filters, no highlights reel, just people being genuine with one another.</p>
-      </div>
-      <div class="value-item reveal reveal-delay-2">
-        <h4>Accountability</h4>
-        <p>Growth happens in community. Real accountability means someone showing up when you say you will — and calling you out, with care, when you don't. That kind of relationship changes people.</p>
-      </div>
-      <div class="value-item reveal reveal-delay-3">
         <h4>Belonging</h4>
         <p>Everyone deserves a group of people who truly know them — and who show up in person. We build the infrastructure that makes real-world belonging possible, for everyone.</p>
       </div>
-    </div>
-  </section>
-
-  <!-- FOOTNOTES -->
-  <section style="padding-top: 0; padding-bottom: 3rem;">
-    <div class="footnotes reveal">
-      <p><sup>1</sup> Derived estimate. Population base from U.S. Census Bureau (2024–2025) and Pew Research Center Mobile Fact Sheet (2024), which shows 97–98% smartphone adoption among adults aged 18–49. Group participation rate of ~30% applied based on Survey Center on American Life data on involvement in faith-based, fitness, professional, and support groups. <a href="https://www.pewresearch.org/internet/fact-sheet/mobile/" target="_blank" rel="noopener">pewresearch.org</a> · <a href="https://www.worldometers.info/demographics/us-demographics/" target="_blank" rel="noopener">worldometers.info</a></p>
-      <p><sup>2</sup> Holt-Lunstad, J. et al. (2010). Social relationships and mortality risk: a meta-analytic review of 148 studies. Presented at Harvard T.H. Chan School of Public Health, Lee Kum Sheung Center for Health and Happiness, October 2023. Also cited in the U.S. Surgeon General's Advisory on the Healing Effects of Social Connection and Community (2023). <a href="https://hsph.harvard.edu/health-happiness/news/from-loneliness-to-social-connection-lessons-from-research-and-a-global-pandemic/" target="_blank" rel="noopener">hsph.harvard.edu</a></p>
-      <p><sup>3</sup> Cox, D. (2021). The state of American friendship: Change, challenges, and loss. <em>Survey Center on American Life, American Enterprise Institute.</em> <a href="https://www.americansurveycenter.org/research/the-state-of-american-friendship-change-challenges-and-loss/" target="_blank" rel="noopener">americansurveycenter.org</a></p>
+      <div class="value-item reveal reveal-delay-2">
+        <h4>Authenticity</h4>
+        <p>Real relationships, not curated performance. The space to show up exactly as you are — no filters, no highlights reel, just people being genuine with one another.</p>
+      </div>
+      <div class="value-item reveal reveal-delay-3">
+        <h4>Accountability</h4>
+        <p>Growth happens in community. Real accountability means someone showing up when you say you will — and calling you out, with care, when you don't. That kind of relationship changes people.</p>
+      </div>
     </div>
   </section>
 
@@ -957,19 +948,19 @@
         <div class="form-row">
           <div class="form-group">
             <label>First Name</label>
-            <input type="text" placeholder="John" required />
+            <input type="text" placeholder="John" />
           </div>
           <div class="form-group">
             <label>Last Name</label>
-            <input type="text" placeholder="Smith" required />
+            <input type="text" placeholder="Smith" />
           </div>
         </div>
         <div class="form-group">
-          <label>Email Address</label>
+          <label>Email Address <span style="color:var(--amber); font-weight:400; text-transform:none; letter-spacing:0;">(required)</span></label>
           <input type="email" placeholder="you@yourorganization.com" required />
         </div>
         <div class="form-group">
-          <label>Organization Type</label>
+          <label>Organization Type <span style="color:var(--amber); font-weight:400; text-transform:none; letter-spacing:0;">(required)</span></label>
           <select required>
             <option value="" disabled selected>Select one...</option>
             <option>Church</option>
@@ -983,18 +974,29 @@
           </select>
         </div>
         <div class="form-group">
-          <label>Organization Name <span style="color:var(--cream-muted); font-weight:300; text-transform:none; letter-spacing:0;">(optional)</span></label>
+          <label>Organization Name</label>
           <input type="text" placeholder="e.g. Your Organization" />
         </div>
         <div class="form-group">
           <label>Message</label>
-          <textarea placeholder="Tell us about your community and how we can help..." required></textarea>
+          <textarea placeholder="Tell us about your community and how we can help..."></textarea>
         </div>
         <button type="submit" class="btn-primary" style="width:100%; text-align:center;" id="contact-btn">Send Message</button>
         <div class="success-msg" id="contact-success" style="display:none; font-size:0.9rem;">✓ Message received. We'll be in touch shortly.</div>
       </form>
     </div>
   </section>
+
+  <!-- FOOTNOTES -->
+  <div style="background: var(--bg-warm); border-top: 1px solid var(--border);">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 2.5rem 4rem;">
+      <div class="footnotes">
+        <p><sup>1</sup> Derived estimate. Population base from U.S. Census Bureau (2024–2025) and Pew Research Center Mobile Fact Sheet (2024), which shows 97–98% smartphone adoption among adults aged 18–49. Group participation rate of ~30% applied based on Survey Center on American Life data on involvement in faith-based, fitness, professional, and support groups. <a href="https://www.pewresearch.org/internet/fact-sheet/mobile/" target="_blank" rel="noopener">pewresearch.org</a> · <a href="https://www.worldometers.info/demographics/us-demographics/" target="_blank" rel="noopener">worldometers.info</a></p>
+        <p><sup>2</sup> Holt-Lunstad, J. et al. (2010). Social relationships and mortality risk: a meta-analytic review of 148 studies. Presented at Harvard T.H. Chan School of Public Health, Lee Kum Sheung Center for Health and Happiness, October 2023. Also cited in the U.S. Surgeon General's Advisory on the Healing Effects of Social Connection and Community (2023). <a href="https://hsph.harvard.edu/health-happiness/news/from-loneliness-to-social-connection-lessons-from-research-and-a-global-pandemic/" target="_blank" rel="noopener">hsph.harvard.edu</a></p>
+        <p><sup>3</sup> Cox, D. (2021). The state of American friendship: Change, challenges, and loss. <em>Survey Center on American Life, American Enterprise Institute.</em> <a href="https://www.americansurveycenter.org/research/the-state-of-american-friendship-change-challenges-and-loss/" target="_blank" rel="noopener">americansurveycenter.org</a></p>
+      </div>
+    </div>
+  </div>
 
   <!-- FOOTER -->
   <footer>
@@ -1011,14 +1013,22 @@
     </div>
   </footer>
 
+  <!-- Supabase client -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
   <script>
-    // Nav scroll effect
+    // ── Supabase setup ──────────────────────────────────────────
+    const SUPABASE_URL = 'https://ccdxrriaaosbsgqxyrnu.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_7HQLgw-eFer8_DgrYTgJZw_e2FgvUSj';
+    const snClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    // ── Nav scroll effect ───────────────────────────────────────
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => {
       nav.classList.toggle('scrolled', window.scrollY > 60);
     });
 
-    // Scroll reveal
+    // ── Scroll reveal ───────────────────────────────────────────
     const reveals = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => {
@@ -1030,34 +1040,84 @@
     }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
     reveals.forEach(el => observer.observe(el));
 
-    // Email capture
-    function handleCapture(app) {
+    // ── Men's Group & Women's Group email capture ───────────────
+    async function handleCapture(app) {
       const input = document.getElementById(app + '-email');
       const success = document.getElementById(app + '-success');
-      if (!input.value || !input.value.includes('@')) {
+      const email = input.value.trim();
+
+      if (!email || !email.includes('@')) {
         input.style.borderColor = '#c0392b';
         setTimeout(() => input.style.borderColor = '', 1500);
         return;
       }
+
+      const source = app === 'mg' ? 'mens_group_launch' : 'womens_group_launch';
+
+      const { error } = await snClient
+        .from('website_contacts')
+        .insert({ email: email, source: source });
+
+      if (error) {
+        console.error('Supabase error:', error.message);
+        input.style.borderColor = '#c0392b';
+        setTimeout(() => input.style.borderColor = '', 1500);
+        return;
+      }
+
       input.style.display = 'none';
       input.nextElementSibling.style.display = 'none';
       success.style.display = 'block';
     }
 
-    // Contact form
-    function handleContact(e) {
+    // ── Partner / leader contact form ───────────────────────────
+    async function handleContact(e) {
       e.preventDefault();
       const btn = document.getElementById('contact-btn');
       const success = document.getElementById('contact-success');
+
+      // Read form fields
+      const form = e.target;
+      const inputs = form.querySelectorAll('input, select, textarea');
+      const firstName = inputs[0].value.trim();
+      const lastName  = inputs[1].value.trim();
+      const email     = inputs[2].value.trim();
+      const communityType = inputs[3].value.trim();
+      // inputs[4] is optional org name — stored in message prefix
+      const orgName   = inputs[4].value.trim();
+      const message   = inputs[5].value.trim();
+
       btn.textContent = 'Sending...';
       btn.disabled = true;
-      setTimeout(() => {
-        btn.style.display = 'none';
-        success.style.display = 'block';
-      }, 800);
+
+      const fullMessage = orgName
+        ? `Organization: ${orgName}\n\n${message}`
+        : message;
+
+      const { error } = await snClient
+        .from('website_contacts')
+        .insert({
+          first_name:     firstName,
+          last_name:      lastName,
+          email:          email,
+          community_type: communityType,
+          message:        fullMessage,
+          source:         'partner_inquiry'
+        });
+
+      if (error) {
+        console.error('Supabase error:', error.message);
+        btn.textContent = 'Send Message';
+        btn.disabled = false;
+        alert('Something went wrong. Please try again or email us directly at hello@socialnexus.group');
+        return;
+      }
+
+      btn.style.display = 'none';
+      success.style.display = 'block';
     }
 
-    // Smooth scroll for nav links
+    // ── Smooth scroll for nav links ─────────────────────────────
     document.querySelectorAll('a[href^="#"]').forEach(a => {
       a.addEventListener('click', e => {
         const target = document.querySelector(a.getAttribute('href'));
