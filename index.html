@@ -1059,9 +1059,17 @@
         .insert({ email: email, source: source });
 
       if (error) {
-        console.error('Supabase error:', error.message);
-        input.style.borderColor = '#c0392b';
-        setTimeout(() => input.style.borderColor = '', 1500);
+        if (error.code === '23505') {
+          // Duplicate email for this source
+          input.style.display = 'none';
+          input.nextElementSibling.style.display = 'none';
+          success.textContent = "✓ You're already on the list — we'll be in touch.";
+          success.style.display = 'block';
+        } else {
+          console.error('Supabase error:', error.message);
+          input.style.borderColor = '#c0392b';
+          setTimeout(() => input.style.borderColor = '', 1500);
+        }
         return;
       }
 
@@ -1112,6 +1120,7 @@
 
       btn.style.display = 'none';
       success.style.display = 'block';
+      form.reset();
     }
 
     // ── Smooth scroll for nav links ─────────────────────────────
