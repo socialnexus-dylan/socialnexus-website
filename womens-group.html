@@ -13,7 +13,7 @@
   <meta property="og:url" content="https://socialnexus.group/womens-group" />
   <meta property="og:site_name" content="Social Nexus" />
   <meta name="twitter:card" content="summary_large_image" />
-  <script>document.documentElement.classList.add('js');</script>
+  <script data-cfasync="false">document.documentElement.classList.add('js');</script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -190,6 +190,7 @@
     .capture-row button:hover { filter: brightness(1.12); }
 
     /* post-signup panel */
+    .capture-error { display: none; margin-top: 0.6rem; font-size: 0.8rem; color: #D26A5C; text-align: left; }
     .post-signup { display: none; text-align: left; background: var(--card); border: 1px solid var(--border-accent); padding: 1.5rem; }
     .post-signup .ps-check { color: var(--accent); font-size: 0.95rem; font-weight: 500; margin-bottom: 0.35rem; }
     .post-signup .ps-note { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.1rem; }
@@ -515,6 +516,7 @@
         <input type="email" placeholder="your@email.com" id="hero-email" />
         <button onclick="joinWaitlist('hero')">Join the Waitlist</button>
       </div>
+      <div class="capture-error" id="hero-error"></div>
       <div class="post-signup" id="hero-post-signup"></div>
     </div>
     <p class="hero-trust"><span>✓</span> Free to join &nbsp;·&nbsp; <span>✓</span> First access at launch &nbsp;·&nbsp; <span>✓</span> No spam, ever</p>
@@ -716,6 +718,7 @@
         <input type="email" placeholder="your@email.com" id="footer-email" />
         <button onclick="joinWaitlist('footer')">Join the Waitlist</button>
       </div>
+      <div class="capture-error" id="footer-error"></div>
       <div class="post-signup" id="footer-post-signup" style="margin-top: 2.25rem;"></div>
       <p class="final-note">Know a woman who needs her circle? The best ones start with a single invitation.</p>
     </div>
@@ -813,13 +816,14 @@
   </footer>
 
   <!-- Supabase client -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script>
+  <script data-cfasync="false" src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script data-cfasync="false">
     // ── Launch switch ─────────────────────────────────────────────
     // At launch: set to true → waitlist sections hide, download section shows.
     const APP_LAUNCHED = false;
 
     // ── Supabase (same project + table as the homepage) ──────────
+    const CONTACT_EMAIL = 'hello' + '@' + 'socialnexus.group'; // assembled so Cloudflare email obfuscation cannot rewrite it
     const SUPABASE_URL = 'https://ccdxrriaaosbsgqxyrnu.supabase.co';
     const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNjZHhycmlhYW9zYnNncXh5cm51Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg4MTc0ODEsImV4cCI6MjA5NDM5MzQ4MX0.7YiHWi5-0KhtZE5bbdlGcNuANOCnhfUjFKGycpQykfQ';
     let snClient = null;
@@ -842,28 +846,47 @@
     }
 
     // ── Waitlist signup ───────────────────────────────────────────
+    function showError(loc, msg) {
+      const el = document.getElementById(loc + '-error');
+      if (el) { el.textContent = msg; el.style.display = 'block'; }
+    }
+
+    function hideError(loc) {
+      const el = document.getElementById(loc + '-error');
+      if (el) { el.style.display = 'none'; }
+    }
+
     async function joinWaitlist(loc) {
       const input = document.getElementById(loc + '-email');
       const email = input.value.trim();
-      if (!email || !email.includes('@')) {
+      hideError(loc);
+      if (!email || !email.includes('@') || !email.includes('.')) {
         input.style.borderColor = '#c0392b';
+        showError(loc, 'Please enter a valid email address.');
         setTimeout(() => input.style.borderColor = '', 1500);
         return;
       }
 
       if (!snClient) {
-        window.location.href = 'mailto:hello@socialnexus.group?subject=' + encodeURIComponent('Waitlist: ' + APP_NAME) + '&body=' + encodeURIComponent('Please add me to the ' + APP_NAME + ' waitlist: ' + email);
+        showError(loc, 'Our signup service did not load. Please refresh the page and try again, or email ' + CONTACT_EMAIL + ' and we will add you.');
         return;
       }
 
-      const { error } = await snClient.from('website_contacts').insert({ email, source: SOURCE });
+      let result;
+      try {
+        result = await snClient.from('website_contacts').insert({ email, source: SOURCE });
+      } catch (e) {
+        console.error('Network error:', e);
+        showError(loc, 'Connection problem. Please try again, or email ' + CONTACT_EMAIL + '.');
+        return;
+      }
+      const error = result.error;
       let already = false;
       if (error) {
         if (error.code === '23505') { already = true; }
         else {
-          console.error('Supabase error:', error.message);
-          input.style.borderColor = '#c0392b';
-          setTimeout(() => input.style.borderColor = '', 1500);
+          console.error('Supabase error:', error.code, error.message);
+          showError(loc, 'Something went wrong on our end. Please try again, or email ' + CONTACT_EMAIL + '.');
           return;
         }
       }
@@ -954,7 +977,7 @@
       message = message ? message + "\n\n" + attribution : attribution;
 
       if (!snClient) {
-        window.location.href = 'mailto:hello@socialnexus.group?subject=' + encodeURIComponent("Start a Group: Women's Group") + '&body=' + encodeURIComponent(message + '\nFrom: ' + firstName + ' ' + lastName + ' <' + email + '>');
+        window.location.href = 'mailto:' + CONTACT_EMAIL + '?subject=' + encodeURIComponent("Start a Group: Women's Group") + '&body=' + encodeURIComponent(message + '\nFrom: ' + firstName + ' ' + lastName + ' <' + email + '>');
         return;
       }
 
@@ -981,7 +1004,7 @@
         console.error('Supabase error:', error.message);
         btn.textContent = 'Send Message';
         btn.disabled = false;
-        alert('Something went wrong. Please try again or email us directly at hello@socialnexus.group');
+        alert('Something went wrong. Please try again or email us directly at ' + CONTACT_EMAIL);
         return;
       }
 

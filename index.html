@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Social Nexus | Building Community That Lasts</title>
+  <script data-cfasync="false">document.documentElement.classList.add('js');</script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -586,6 +587,13 @@
       padding: 0.5rem 0;
     }
 
+    .capture-error {
+      display: none;
+      font-size: 0.8rem;
+      color: #D26A5C;
+      padding: 0.4rem 0 0;
+    }
+
     /* VALUES */
     .values-grid {
       display: grid;
@@ -806,13 +814,13 @@
       50% { opacity: 1; transform: scaleY(1.1); }
     }
 
-    .reveal {
+    html.js .reveal {
       opacity: 0;
       transform: translateY(28px);
       transition: opacity 0.7s ease, transform 0.7s ease;
     }
 
-    .reveal.visible {
+    html.js .reveal.visible {
       opacity: 1;
       transform: translateY(0);
     }
@@ -968,6 +976,7 @@
               <button onclick="handleCapture('mg')">Notify Me</button>
             </div>
             <div class="success-msg" id="mg-success">✓ You're on the list. We'll be in touch.</div>
+            <div class="capture-error" id="mg-error"></div>
           </div>
         </div>
 
@@ -985,6 +994,7 @@
               <button onclick="handleCapture('wg')">Notify Me</button>
             </div>
             <div class="success-msg" id="wg-success">✓ You're on the list. We'll be in touch.</div>
+            <div class="capture-error" id="wg-error"></div>
           </div>
         </div>
 
@@ -1084,13 +1094,16 @@
   </footer>
 
   <!-- Supabase client -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script data-cfasync="false" src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-  <script>
+  <script data-cfasync="false">
     // ── Supabase setup ──────────────────────────────────────────
     const SUPABASE_URL = 'https://ccdxrriaaosbsgqxyrnu.supabase.co';
     const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNjZHhycmlhYW9zYnNncXh5cm51Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg4MTc0ODEsImV4cCI6MjA5NDM5MzQ4MX0.7YiHWi5-0KhtZE5bbdlGcNuANOCnhfUjFKGycpQykfQ';
-    const snClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    const CONTACT_EMAIL = 'hello' + '@' + 'socialnexus.group'; // assembled so Cloudflare email obfuscation cannot rewrite it
+    let snClient = null;
+    try { snClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY); }
+    catch (e) { console.error('Supabase client failed to load:', e); }
 
     // ── Nav scroll effect ───────────────────────────────────────
     const nav = document.getElementById('nav');
@@ -1127,34 +1140,50 @@
     reveals.forEach(el => observer.observe(el));
 
     // ── Men's Group & Women's Group email capture ───────────────
+    function captureError(app, msg) {
+      const el = document.getElementById(app + '-error');
+      if (el) { el.textContent = msg; el.style.display = 'block'; }
+    }
+
     async function handleCapture(app) {
       const input = document.getElementById(app + '-email');
       const success = document.getElementById(app + '-success');
       const email = input.value.trim();
+      const errEl = document.getElementById(app + '-error');
+      if (errEl) errEl.style.display = 'none';
 
-      if (!email || !email.includes('@')) {
+      if (!email || !email.includes('@') || !email.includes('.')) {
         input.style.borderColor = '#c0392b';
+        captureError(app, 'Please enter a valid email address.');
         setTimeout(() => input.style.borderColor = '', 1500);
+        return;
+      }
+
+      if (!snClient) {
+        captureError(app, 'Our signup service did not load. Please refresh the page and try again, or email ' + CONTACT_EMAIL + '.');
         return;
       }
 
       const source = app === 'mg' ? 'mens_group_launch' : 'womens_group_launch';
 
-      const { error } = await snClient
-        .from('website_contacts')
-        .insert({ email: email, source: source });
+      let result;
+      try {
+        result = await snClient.from('website_contacts').insert({ email: email, source: source });
+      } catch (e) {
+        console.error('Network error:', e);
+        captureError(app, 'Connection problem. Please try again, or email ' + CONTACT_EMAIL + '.');
+        return;
+      }
 
-      if (error) {
-        if (error.code === '23505') {
-          // Duplicate email for this source
+      if (result.error) {
+        if (result.error.code === '23505') {
           input.style.display = 'none';
           input.nextElementSibling.style.display = 'none';
           success.textContent = "✓ You're already on the list. We'll be in touch.";
           success.style.display = 'block';
         } else {
-          console.error('Supabase error:', error.message);
-          input.style.borderColor = '#c0392b';
-          setTimeout(() => input.style.borderColor = '', 1500);
+          console.error('Supabase error:', result.error.code, result.error.message);
+          captureError(app, 'Something went wrong on our end. Please try again, or email ' + CONTACT_EMAIL + '.');
         }
         return;
       }
@@ -1181,26 +1210,46 @@
       const orgName   = inputs[4].value.trim();
       const message   = inputs[5].value.trim();
 
+      if (!snClient) {
+        alert('Our contact service did not load. Please refresh the page and try again, or email ' + CONTACT_EMAIL);
+        return;
+      }
+
       btn.textContent = 'Sending...';
       btn.disabled = true;
 
-      const { error } = await snClient
-        .from('website_contacts')
-        .insert({
-          first_name:        firstName,
-          last_name:         lastName,
-          email:             email,
-          community_type:    communityType,
-          organization_name: orgName || null,
-          message:           message || null,
-          source:            'partner_inquiry'
-        });
-
-      if (error) {
-        console.error('Supabase error:', error.message);
+      let result;
+      try {
+        result = await snClient
+          .from('website_contacts')
+          .insert({
+            first_name:        firstName,
+            last_name:         lastName,
+            email:             email,
+            community_type:    communityType,
+            organization_name: orgName || null,
+            message:           message || null,
+            source:            'partner_inquiry'
+          });
+      } catch (e) {
+        console.error('Network error:', e);
         btn.textContent = 'Send Message';
         btn.disabled = false;
-        alert('Something went wrong. Please try again or email us directly at hello@socialnexus.group');
+        alert('Connection problem. Please try again, or email ' + CONTACT_EMAIL);
+        return;
+      }
+
+      if (result.error) {
+        if (result.error.code === '23505') {
+          btn.style.display = 'none';
+          success.textContent = "✓ We already have your inquiry. We'll be in touch.";
+          success.style.display = 'block';
+          return;
+        }
+        console.error('Supabase error:', result.error.code, result.error.message);
+        btn.textContent = 'Send Message';
+        btn.disabled = false;
+        alert('Something went wrong. Please try again or email us directly at ' + CONTACT_EMAIL);
         return;
       }
 
