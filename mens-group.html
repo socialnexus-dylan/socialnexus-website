@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Men's Group | Real Brotherhood, In Real Life | Social Nexus</title>
+  <meta name="description" content="Men's Group is a mobile app for men who want real community: faith groups, fitness crews, book clubs, veteran circles, and professional networks that meet in person. Join the waitlist." />
+  <meta name="theme-color" content="#0C1017" />
+  <!-- Open Graph / social sharing -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Men's Group: Real Brotherhood, In Real Life" />
+  <meta property="og:description" content="Small in-person men's groups with shared goals and real accountability. Coming soon to iOS and Android. Join the waitlist." />
+  <meta property="og:url" content="https://socialnexus.group/mens-group" />
+  <meta property="og:site_name" content="Social Nexus" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <script>document.documentElement.classList.add('js');</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── Men's Group tokens — Developer Spec Sheet (dark mode) ─── */
+    :root {
+      --bg: #0C1017;
+      --card: #141C28;
+      --card-2: #1E2634;
+      --border: #2A3342;
+      --text: #F2EEE4;
+      --text-muted: #98A0AE;
+      --accent: #A9925A;          /* ACCENT gold — dark token */
+      --accent-dim: rgba(169, 146, 90, 0.12);
+      --border-accent: rgba(169, 146, 90, 0.3);
+      /* light-mode tokens — used only inside the app preview */
+      --lm-bg: #E9EDF2;
+      --lm-card: #FFFFFF;
+      --lm-card-2: #F0F3F8;
+      --lm-border: #D3DAE4;
+      --lm-text: #101722;
+      --lm-text-muted: #586374;
+      --lm-accent: #96773B;       /* ACCENT gold — light token */
+      --lm-ribbon: #141C28;       /* ribbon navy */
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* grain overlay — same texture language as socialnexus.group */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 100;
+      opacity: 0.4;
+    }
+
+    /* ─── slim nav: minimal exits = higher conversion ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 50;
+      padding: 1.1rem 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(to bottom, rgba(12,16,23,0.95) 0%, transparent 100%);
+      transition: backdrop-filter 0.3s;
+    }
+    nav.scrolled {
+      backdrop-filter: blur(16px);
+      background: rgba(12,16,23,0.92);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-brand { display: flex; align-items: center; gap: 0.85rem; text-decoration: none; }
+    .nav-tile {
+      width: 38px; height: 38px;
+      background: linear-gradient(160deg, #121822, #0F141D);
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      font-family: 'Fraunces', serif;
+      font-size: 1.15rem; color: #fff;
+      line-height: 1;
+      padding-top: 2px;
+    }
+    .nav-tile::after { content: ''; width: 14px; height: 1.5px; background: var(--accent); margin-top: 3px; }
+    .nav-brand-text { display: flex; flex-direction: column; line-height: 1.25; }
+    .nav-brand-name { font-family: 'Fraunces', serif; font-size: 1.05rem; font-weight: 600; color: var(--text); }
+    .nav-brand-by { font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); }
+    .nav-brand:hover .nav-brand-by { color: var(--text); }
+    .nav-cta {
+      background: var(--accent);
+      color: var(--bg);
+      padding: 0.6rem 1.5rem;
+      font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      text-decoration: none;
+      transition: filter 0.2s, transform 0.2s;
+    }
+    .nav-cta:hover { filter: brightness(1.12); transform: translateY(-1px); }
+
+    /* ─── hero ─── */
+    .hero {
+      min-height: 92vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 8rem 4rem 5rem;
+      position: relative; text-align: center;
+      overflow: hidden;
+    }
+    .hero-glow {
+      position: absolute; top: 32%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 820px; height: 520px;
+      background: radial-gradient(ellipse at center, rgba(169,146,90,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      font-size: 0.75rem; font-weight: 500;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 1.75rem;
+      opacity: 0; animation: fadeUp 0.8s ease 0.15s forwards;
+    }
+    .hero h1 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2.75rem, 6.5vw, 5.75rem);
+      font-weight: 300; line-height: 1.06;
+      letter-spacing: -0.03em; max-width: 880px;
+      margin-bottom: 1.5rem;
+      opacity: 0; animation: fadeUp 0.9s ease 0.3s forwards;
+    }
+    .hero h1 em { font-style: italic; color: var(--accent); }
+    .hero-sub {
+      font-size: 1.08rem; color: var(--text-muted);
+      max-width: 560px; margin-bottom: 2.75rem; line-height: 1.8;
+      opacity: 0; animation: fadeUp 0.9s ease 0.45s forwards;
+    }
+    .hero-capture { opacity: 0; animation: fadeUp 0.9s ease 0.6s forwards; width: 100%; max-width: 460px; }
+    .hero-trust {
+      margin-top: 1rem; font-size: 0.75rem; color: var(--text-muted);
+      letter-spacing: 0.04em;
+      opacity: 0; animation: fadeUp 0.9s ease 0.75s forwards;
+    }
+    .hero-trust span { color: var(--accent); }
+    .hero-lead-link {
+      margin-top: 0.9rem; font-size: 0.78rem; color: var(--text-muted);
+      opacity: 0; animation: fadeUp 0.9s ease 0.85s forwards;
+    }
+    .hero-lead-link a { color: var(--text-muted); text-decoration: underline; text-underline-offset: 3px; transition: color 0.2s; }
+    .hero-lead-link a:hover { color: var(--text); }
+
+    /* ─── waitlist capture (shared) ─── */
+    .capture-row { display: flex; gap: 0; width: 100%; }
+    .capture-row input[type="email"] {
+      flex: 1;
+      background: rgba(242,238,228,0.05);
+      border: 1px solid var(--border);
+      border-right: none;
+      padding: 0.95rem 1.15rem;
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem; font-weight: 300;
+      outline: none; min-width: 0;
+      transition: border-color 0.2s;
+    }
+    .capture-row input[type="email"]::placeholder { color: rgba(152,160,174,0.5); }
+    .capture-row input[type="email"]:focus { border-color: var(--accent); }
+    .capture-row button {
+      background: var(--accent);
+      border: 1px solid var(--accent);
+      color: var(--bg);
+      padding: 0.95rem 1.6rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      cursor: pointer; white-space: nowrap;
+      transition: filter 0.2s;
+    }
+    .capture-row button:hover { filter: brightness(1.12); }
+
+    /* post-signup panel: segmentation chips + share */
+    .post-signup { display: none; text-align: left; background: var(--card); border: 1px solid var(--border-accent); padding: 1.5rem; }
+    .post-signup .ps-check { color: var(--accent); font-size: 0.95rem; font-weight: 500; margin-bottom: 0.35rem; }
+    .post-signup .ps-note { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.1rem; }
+    .ps-question { font-size: 0.78rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.6rem; }
+    .ps-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.25rem; }
+    .ps-chips button {
+      background: transparent; border: 1px solid var(--border);
+      color: var(--text-muted); padding: 0.4rem 0.9rem;
+      font-family: 'Inter', sans-serif; font-size: 0.8rem; font-weight: 400;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .ps-chips button:hover { border-color: var(--accent); color: var(--text); }
+    .ps-chips button.selected { background: var(--accent-dim); border-color: var(--accent); color: var(--accent); }
+    .ps-share { border-top: 1px solid var(--border); padding-top: 1.1rem; }
+    .ps-share-label { font-size: 0.9rem; color: var(--text); margin-bottom: 0.65rem; }
+    .ps-share button {
+      background: transparent; border: 1px solid var(--border-accent);
+      color: var(--text); padding: 0.55rem 1.2rem;
+      font-family: 'Inter', sans-serif; font-size: 0.78rem; font-weight: 500;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .ps-share button:hover { border-color: var(--accent); color: var(--accent); }
+    .ps-copy-row { display: flex; gap: 0; margin-bottom: 0.75rem; }
+    .ps-copy-row input {
+      flex: 1; min-width: 0;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border); border-right: none;
+      padding: 0.5rem 0.9rem;
+      color: var(--text-muted);
+      font-family: 'Inter', sans-serif; font-size: 0.8rem;
+      outline: none;
+    }
+    .ps-copy-row button {
+      background: var(--accent-dim);
+      border: 1px solid var(--border-accent);
+      color: var(--accent);
+      padding: 0.5rem 1rem;
+      font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      cursor: pointer; white-space: nowrap;
+      transition: all 0.2s;
+    }
+    .ps-copy-row button:hover { border-color: var(--accent); }
+    .ps-share-buttons { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .ps-share-buttons a, .ps-share-buttons button {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 0.45rem 1rem;
+      font-family: 'Inter', sans-serif; font-size: 0.78rem; font-weight: 400;
+      letter-spacing: 0.03em;
+      text-decoration: none; cursor: pointer;
+      transition: all 0.2s;
+    }
+    .ps-share-buttons a:hover, .ps-share-buttons button:hover { border-color: var(--accent); color: var(--text); }
+
+    /* ─── shared section styles ─── */
+    section { padding: 6.5rem 4rem; max-width: 1200px; margin: 0 auto; }
+    section.full-width { max-width: none; padding: 6.5rem 0; }
+    .section-inner { max-width: 1200px; margin: 0 auto; padding: 0 4rem; }
+    .section-label {
+      font-size: 0.7rem; font-weight: 600;
+      letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 1.25rem; display: block;
+    }
+    .section-heading {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(1.9rem, 4vw, 3rem);
+      font-weight: 300; letter-spacing: -0.02em;
+      line-height: 1.15; margin-bottom: 1.25rem;
+    }
+    .section-heading em { font-style: italic; color: var(--accent); }
+    .divider { width: 100%; height: 1px; background: var(--border); position: relative; }
+    .divider::after {
+      content: ''; position: absolute; left: 50%; top: 0;
+      transform: translateX(-50%);
+      width: 80px; height: 1px; background: var(--accent);
+    }
+
+    /* ─── why section: stats ─── */
+    .why-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 5rem; align-items: center; }
+    .why-body { font-size: 1.02rem; color: var(--text-muted); line-height: 1.85; }
+    .why-body p + p { margin-top: 1.2rem; }
+    .why-body strong { color: var(--text); font-weight: 500; }
+    .stats { display: flex; flex-direction: column; gap: 1.9rem; }
+    .stat-item { border-left: 2px solid var(--accent); padding-left: 1.5rem; }
+    .stat-number { font-family: 'Fraunces', serif; font-size: 2.6rem; font-weight: 300; line-height: 1; margin-bottom: 0.4rem; }
+    .stat-label { font-size: 0.9rem; color: var(--text-muted); }
+    .stat-source { font-size: 0.68rem; color: rgba(152,160,174,0.5); margin-top: 0.35rem; }
+
+    /* ─── how it works ─── */
+    .steps-section { background: #10151E; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .steps-header { text-align: center; margin-bottom: 4rem; }
+    .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+    .step-card { background: var(--card); border: 1px solid var(--border); padding: 2.5rem; position: relative; }
+    .step-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(to right, var(--accent), transparent);
+    }
+    .step-num {
+      font-family: 'Fraunces', serif; font-style: italic;
+      font-size: 2.4rem; color: var(--accent); line-height: 1;
+      margin-bottom: 1.25rem; display: block;
+    }
+    .step-card h3 { font-family: 'Fraunces', serif; font-size: 1.35rem; font-weight: 400; margin-bottom: 0.75rem; }
+    .step-card p { font-size: 0.92rem; color: var(--text-muted); line-height: 1.8; }
+
+    /* ─── app preview: phone mockup in LIGHT MODE tokens ─── */
+    .preview-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .preview-copy .feature-list { list-style: none; margin-top: 2rem; display: flex; flex-direction: column; gap: 1.4rem; }
+    .feature-list li { padding-left: 1.75rem; position: relative; }
+    .feature-list li::before {
+      content: ''; position: absolute; left: 0; top: 0.6rem;
+      width: 14px; height: 1.5px; background: var(--accent);
+    }
+    .feature-list h4 { font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 400; margin-bottom: 0.3rem; }
+    .feature-list p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.75; }
+    .phone-wrap { display: flex; justify-content: center; }
+    .phone {
+      width: min(310px, 100%); border-radius: 40px;
+      background: #05070B;
+      border: 1px solid var(--border);
+      padding: 11px;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.55), 0 0 0 1px rgba(169,146,90,0.08);
+    }
+    .phone-screen {
+      --serif: 'Fraunces';
+      --p-bg: #E9EDF2;
+      --p-card: #FFFFFF;
+      --p-border: #D3DAE4;
+      --p-field: #FFFFFF;
+      --p-text: #101722;
+      --p-muted: #586374;
+      --p-accent: #96773B;
+      --p-tag: #96773B;
+      --p-oncolor: #101722;
+      --p-hostchip: rgba(150,119,59,0.12);
+      --p-ring: #141C28;
+      --p-tabbar: #141C28;
+      --p-tab-muted: #98A0AE;
+      --p-tab-active: #E0C989;
+      --p-cardshadow: 0 2px 6px rgba(16,23,34,0.06);
+      border-radius: 30px; overflow: hidden;
+      background: var(--p-bg);
+      font-family: 'Inter', sans-serif;
+      color: var(--p-text);
+    }
+    .ps-status { display: flex; justify-content: space-between; align-items: center; padding: 0.65rem 1.2rem 0.1rem; font-size: 0.62rem; color: var(--p-text); font-weight: 600; }
+    .ps-top-actions { display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; padding: 0.55rem 1rem 0; }
+    .ps-plus { width: 30px; height: 30px; border-radius: 50%; background: var(--p-hostchip); color: var(--p-accent); font-size: 1.05rem; font-weight: 300; display: flex; align-items: center; justify-content: center; }
+    .ps-avatar { width: 30px; height: 30px; border-radius: 50%; border: 1.5px solid var(--p-ring); color: var(--p-text); font-size: 0.52rem; font-weight: 600; display: flex; align-items: center; justify-content: center; }
+    .ps-header { padding: 0.35rem 1.2rem 0.55rem; }
+    .ps-eyebrow { font-size: 0.52rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--p-accent); }
+    .ps-title { font-family: var(--serif), serif; font-size: 1.7rem; font-weight: 400; color: var(--p-text); line-height: 1.12; }
+    .ps-search { display: flex; align-items: center; gap: 0.5rem; margin: 0 1rem 0.6rem; padding: 0.55rem 0.9rem; background: var(--p-field); border: 1px solid var(--p-border); border-radius: 12px; font-size: 0.62rem; color: var(--p-muted); }
+    .ps-chips-row { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0 1rem 0.7rem; }
+    .ps-chip { font-size: 0.56rem; font-weight: 500; padding: 0.34rem 0.75rem; border-radius: 999px; border: 1px solid var(--p-border); color: var(--p-text); background: var(--p-card); }
+    .ps-chip.active { background: var(--p-accent); color: var(--p-oncolor); border-color: var(--p-accent); }
+    .ps-section-label { font-size: 0.52rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--p-muted); padding: 0.15rem 1.2rem 0.35rem; }
+    .ps-card { position: relative; background: var(--p-card); border: 1px solid var(--p-border); border-radius: 14px; margin: 0 1rem 0.6rem; padding: 0.7rem 0.85rem 0.65rem 1rem; overflow: hidden; box-shadow: var(--p-cardshadow); }
+    .ps-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--p-accent); }
+    .ps-card-head { display: flex; align-items: center; justify-content: space-between; gap: 0.4rem; }
+    .ps-card-title { font-family: var(--serif), serif; font-size: 0.95rem; font-weight: 500; color: var(--p-text); display: flex; align-items: center; gap: 0.35rem; }
+    .ps-lock { opacity: 0.65; flex: none; }
+    .ps-host-chip { font-size: 0.46rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; background: var(--p-hostchip); color: var(--p-muted); padding: 0.22rem 0.55rem; border-radius: 999px; flex: none; }
+    .ps-hosted { font-size: 0.56rem; color: var(--p-accent); margin-top: 0.12rem; }
+    .ps-desc { font-size: 0.6rem; color: var(--p-muted); line-height: 1.5; margin-top: 0.3rem; }
+    .ps-meta-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 0.7rem; margin-top: 0.42rem; }
+    .ps-meta { font-size: 0.56rem; color: var(--p-muted); display: flex; align-items: center; gap: 0.28rem; }
+    .ps-meta i { width: 7px; height: 7px; border: 1px solid currentColor; border-radius: 50%; font-style: normal; display: inline-block; flex: none; }
+    .ps-tags { margin-left: auto; display: flex; gap: 0.3rem; }
+    .ps-tag { font-size: 0.44rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; background: var(--p-hostchip); color: var(--p-tag); padding: 0.2rem 0.5rem; border-radius: 999px; }
+    .ps-tabbar { display: flex; justify-content: space-around; background: var(--p-tabbar); border-top: 1px solid var(--p-border); padding: 0.7rem 0 0.9rem; margin-top: 0.45rem; }
+    .ps-tab { font-size: 0.54rem; color: var(--p-tab-muted); text-align: center; letter-spacing: 0.03em; position: relative; }
+    .ps-tab.active { color: var(--p-tab-active); }
+    .ps-tab i { display: block; width: 14px; height: 14px; border: 1.5px solid currentColor; border-radius: 4px; margin: 0 auto 3px; font-style: normal; }
+    .ps-tab .ps-badge-dot { position: absolute; top: -5px; right: -2px; background: #C96A4A; color: #fff; font-size: 0.42rem; font-weight: 700; width: 11px; height: 11px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+    .preview-note { margin-top: 1.5rem; font-size: 0.78rem; color: var(--text-muted); font-style: italic; }
+
+    /* ─── who it's for ─── */
+    .who-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3.5rem; }
+    .who-card {
+      border: 1px solid var(--border); padding: 1.75rem;
+      transition: border-color 0.3s;
+    }
+    .who-card:hover { border-color: var(--border-accent); }
+    .who-card h4 { font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 400; margin-bottom: 0.5rem; }
+    .who-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.7; }
+
+    /* ─── final CTA ─── */
+    .final-cta { background: #10151E; border-top: 1px solid var(--border); text-align: center; }
+    .final-cta .section-inner { max-width: 620px; }
+    .final-cta .capture-row { margin-top: 2.25rem; }
+    .final-note { margin-top: 1.1rem; font-size: 0.78rem; color: var(--text-muted); }
+
+    /* ─── DOWNLOAD SECTION — hidden until launch (set APP_LAUNCHED = true) ─── */
+    .download-section { display: none; text-align: center; }
+    .store-badges { display: flex; gap: 1rem; justify-content: center; margin-top: 2.25rem; flex-wrap: wrap; }
+    .store-badge {
+      display: flex; align-items: center; gap: 0.75rem;
+      border: 1px solid var(--border-accent); padding: 0.8rem 1.5rem;
+      text-decoration: none; color: var(--text); transition: border-color 0.2s;
+    }
+    .store-badge:hover { border-color: var(--accent); }
+    .store-badge .sb-label { text-align: left; line-height: 1.3; }
+    .store-badge .sb-small { font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); display: block; }
+    .store-badge .sb-big { font-size: 1rem; font-weight: 500; }
+    .qr-slot {
+      width: 140px; height: 140px; margin: 2.25rem auto 0;
+      border: 1px dashed var(--border-accent);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.65rem; color: var(--text-muted); text-align: center; padding: 1rem;
+    }
+
+    /* ─── start a group / community form ─── */
+    .lead-section { background: #10151E; border-top: 1px solid var(--border); }
+    .lead-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 5rem; align-items: start; }
+    .contact-form { display: flex; flex-direction: column; gap: 1.2rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.45rem; }
+    .form-group label { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: rgba(242,238,228,0.04);
+      border: 1px solid var(--border);
+      padding: 0.85rem 1rem;
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem; font-weight: 300;
+      outline: none; width: 100%;
+      transition: border-color 0.2s;
+    }
+    .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(152,160,174,0.35); }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--accent); }
+    .form-group select {
+      cursor: pointer; appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23A9925A' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem;
+    }
+    .form-group select option { background: var(--card); color: var(--text); }
+    .form-group textarea { resize: vertical; min-height: 110px; }
+    .lead-submit {
+      background: var(--accent); border: 1px solid var(--accent);
+      color: var(--bg); padding: 0.9rem 2rem;
+      font-family: 'Inter', sans-serif; font-size: 0.8rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      cursor: pointer; width: 100%; transition: filter 0.2s;
+    }
+    .lead-submit:hover { filter: brightness(1.12); }
+    .lead-success { display: none; font-size: 0.9rem; color: var(--accent); padding: 0.5rem 0; }
+
+    /* ─── footer ─── */
+    footer { background: #10151E; border-top: 1px solid var(--border); padding: 3rem 4rem; }
+    .footer-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 2rem;
+    }
+    .footer-logo { font-family: 'Fraunces', serif; font-size: 1.05rem; font-weight: 600; color: var(--text); text-decoration: none; }
+    .footer-logo span { color: var(--accent); }
+    .footer-links { display: flex; gap: 2rem; flex-wrap: wrap; }
+    .footer-links a { font-size: 0.8rem; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--text); }
+    .footer-copy { font-size: 0.75rem; color: rgba(152,160,174,0.45); }
+
+    /* ─── animations ─── */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    html.js .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    html.js .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* ─── responsive ─── */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .hero { padding: 7rem 1.5rem 4rem; min-height: auto; }
+      section { padding: 4.5rem 1.5rem; }
+      .section-inner { padding: 0 1.5rem; }
+      .why-grid, .preview-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .steps-grid, .who-grid { grid-template-columns: 1fr; }
+      .lead-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .form-row { grid-template-columns: 1fr; }
+      footer { padding: 2.5rem 1.5rem; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+      .capture-row { flex-direction: column; gap: 0.6rem; }
+      .capture-row input[type="email"] { border-right: 1px solid var(--border); }
+    }
+
+    @media (max-width: 420px) {
+      .nav-cta { padding: 0.5rem 0.9rem; font-size: 0.7rem; letter-spacing: 0.05em; }
+      .nav-brand { gap: 0.6rem; }
+      .nav-brand-name { font-size: 0.95rem; }
+      .nav-tile { width: 34px; height: 34px; font-size: 1rem; }
+      .capture-row input[type="email"] { border-right: 1px solid var(--border); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a href="index.html" class="nav-brand" aria-label="Back to the Social Nexus home page">
+      <div class="nav-tile">M</div>
+      <div class="nav-brand-text">
+        <span class="nav-brand-name">Men's Group</span>
+        <span class="nav-brand-by">A Social Nexus App</span>
+      </div>
+    </a>
+    <a href="#waitlist" class="nav-cta">Join the Waitlist</a>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero" id="home">
+    <div class="hero-glow"></div>
+    <span class="hero-eyebrow">Coming Soon on iOS &amp; Android</span>
+    <h1>Build a brotherhood that <em>actually shows up</em></h1>
+    <p class="hero-sub">Men's Group helps you build or join a small group of men who meet in person, set real goals, and hold each other to them. Faith groups, fitness crews, book clubs, veteran circles, professional networks. Not another feed. A room.</p>
+    <div class="hero-capture">
+      <div class="capture-row" id="hero-capture-row">
+        <input type="email" placeholder="your@email.com" id="hero-email" />
+        <button onclick="joinWaitlist('hero')">Join the Waitlist</button>
+      </div>
+      <div class="post-signup" id="hero-post-signup"></div>
+    </div>
+    <p class="hero-trust"><span>✓</span> Free to join &nbsp;·&nbsp; <span>✓</span> First access at launch &nbsp;·&nbsp; <span>✓</span> No spam, ever</p>
+    <p class="hero-lead-link">Want to lead a group? <a href="#lead">Start here</a></p>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- WHY -->
+  <section id="why">
+    <div class="why-grid">
+      <div class="reveal">
+        <span class="section-label">Why This Exists</span>
+        <h2 class="section-heading">Male friendship is in <em>free fall.</em> We're doing something about it.</h2>
+        <div class="why-body">
+          <p>Somewhere between careers, family, and screens, most men quietly lost their circle. The group chat isn't the same as the group. And every man knows it.</p>
+          <p><strong>Men's Group is built on one conviction:</strong> men grow when they show up for each other, face to face, on a schedule. The app handles the logistics of finding your group, scheduling meetings, and tracking goals, so the room can do what only a room can do.</p>
+          <p>Our success metric isn't your screen time. It's whether you were in the room this week. The app is designed to get you off your phone and into your life.</p>
+        </div>
+      </div>
+      <div class="stats reveal reveal-delay-2">
+        <div class="stat-item">
+          <div class="stat-number">15%</div>
+          <div class="stat-label">of American men report having no close friendships at all, a fivefold increase since 1990</div>
+          <div class="stat-source">Survey Center on American Life, American Perspectives Survey (2021)</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">50%</div>
+          <div class="stat-label">greater likelihood of living longer for people with strong social connections</div>
+          <div class="stat-source">Holt-Lunstad et al., meta-analysis of 148 studies; cited by U.S. Surgeon General (2023)</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">79%</div>
+          <div class="stat-label">of group events are now held in person as men choose rooms over screens again</div>
+          <div class="stat-source">Meetup platform data (2023)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="full-width steps-section" id="how">
+    <div class="section-inner">
+      <div class="steps-header reveal">
+        <span class="section-label">How It Works</span>
+        <h2 class="section-heading">Three steps. Zero <em>flaking.</em></h2>
+      </div>
+      <div class="steps-grid">
+        <div class="step-card reveal reveal-delay-1">
+          <span class="step-num">01</span>
+          <h3>Start your group</h3>
+          <p>Gather the men you already know and give your group a home, or join one near you as new groups open. Church groups, gym crews, book clubs, veteran circles. Locked groups stay private to members.</p>
+        </div>
+        <div class="step-card reveal reveal-delay-2">
+          <span class="step-num">02</span>
+          <h3>Set your goals</h3>
+          <p>Set personal goals across faith, fitness, career, family, and finances. Your goals are yours. In a future update, you will choose exactly which goals to share and who sees them.</p>
+        </div>
+        <div class="step-card reveal reveal-delay-3">
+          <span class="step-num">03</span>
+          <h3>Show up. Repeat.</h3>
+          <p>RSVP, meet in person, and keep the streak alive. Real accountability means someone notices when you don't show, and calls you, with care, when you don't follow through.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- APP PREVIEW -->
+  <section id="app">
+    <div class="preview-grid">
+      <div class="preview-copy reveal">
+        <span class="section-label">Inside the App</span>
+        <h2 class="section-heading">Built for men who'd rather <em>be there</em> than scroll</h2>
+        <ul class="feature-list">
+          <li>
+            <h4>Groups &amp; Meetings</h4>
+            <p>Create or join groups, schedule recurring in-person meetings, RSVP in two taps, and see who's coming.</p>
+          </li>
+          <li>
+            <h4>Personal Goals</h4>
+            <p>Set personal goals across the areas of life that matter. Sharing goals with your group is coming, and it will always be your choice.</p>
+          </li>
+          <li>
+            <h4>Calendar &amp; Reminders</h4>
+            <p>One calendar for everything your group does, so meetings actually happen.</p>
+          </li>
+          <li>
+            <h4>The Nexus</h4>
+            <p>A job board and curated book recommendations, because a strong group opens doors and sharpens minds.</p>
+          </li>
+        </ul>
+        <p class="preview-note">Available in light and dark mode, previewed here in light. Screens are design templates; the finished app may differ.</p>
+      </div>
+      <div class="phone-wrap reveal reveal-delay-2">
+        <div class="phone">
+          <div class="phone-screen">
+            <div class="ps-status"><span>9:41</span><span>●●●</span></div>
+            <div class="ps-top-actions">
+              <div class="ps-plus">+</div>
+              <div class="ps-avatar">DK</div>
+            </div>
+            <div class="ps-header">
+              <span class="ps-eyebrow">Brotherhood</span>
+              <div class="ps-title">Groups</div>
+            </div>
+            <div class="ps-search"><svg width="11" height="11" viewBox="0 0 11 11" fill="none"><circle cx="4.5" cy="4.5" r="3.5" stroke="currentColor"/><path d="M7.5 7.5 L10 10" stroke="currentColor"/></svg> Search by name, city, or zip</div>
+            <div class="ps-chips-row"><span class="ps-chip active">All</span><span class="ps-chip">Faith</span><span class="ps-chip">Fitness</span><span class="ps-chip">Fatherhood</span></div>
+            <div class="ps-section-label">Your Groups</div>
+            <div class="ps-card">
+              <div class="ps-card-title">Iron Sharpens Iron</div>
+              <div class="ps-hosted">Hosted by Marcus Doyle</div>
+              <div class="ps-desc">Early-morning lifts and accountability for men who want to get strong in body and character.</div>
+              <div class="ps-meta-row">
+                <span class="ps-meta"><i></i>Scottsdale, AZ</span>
+                <span class="ps-meta"><i></i>14</span>
+                <div class="ps-tags"><span class="ps-tag">Fitness</span><span class="ps-tag">Faith</span></div>
+              </div>
+            </div>
+            <div class="ps-card">
+              <div class="ps-card-head">
+                <div class="ps-card-title">Founding Fathers <svg class="ps-lock" width="9" height="11" viewBox="0 0 9 11" fill="none"><rect x="0.5" y="4.5" width="8" height="6" rx="1" stroke="currentColor"/><path d="M2.5 4.5 V3 a2 2 0 1 1 4 0 V4.5" stroke="currentColor" fill="none"/></svg></div>
+                <span class="ps-host-chip">Host</span>
+              </div>
+              <div class="ps-hosted">Hosted by Dylan King · You</div>
+              <div class="ps-desc">Dads figuring it out together. We talk marriage, discipline, and showing up.</div>
+              <div class="ps-meta-row">
+                <span class="ps-meta"><i></i>Chandler, AZ</span>
+                <span class="ps-meta"><i></i>11</span>
+                <div class="ps-tags"><span class="ps-tag">Fatherhood</span><span class="ps-tag">Faith</span></div>
+              </div>
+            </div>
+            <div class="ps-card">
+              <div class="ps-card-title">The Standard</div>
+              <div class="ps-hosted">Hosted by Andre Whitfield</div>
+              <div class="ps-desc">Weekly table for men who want to lead well at work and at home. Bring the hard questions.</div>
+              <div class="ps-meta-row">
+                <span class="ps-meta"><i></i>Tempe, AZ</span>
+                <span class="ps-meta"><i></i>9</span>
+                <div class="ps-tags"><span class="ps-tag">Career</span></div>
+              </div>
+            </div>
+            <div class="ps-tabbar">
+              <div class="ps-tab"><i></i>Goals</div>
+              <div class="ps-tab active"><i></i>Groups</div>
+              <div class="ps-tab"><i></i>Calendar</div>
+              <div class="ps-tab"><i></i>Inbox<span class="ps-badge-dot">4</span></div>
+              <div class="ps-tab"><i></i>Nexus</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- WHO IT'S FOR -->
+  <section id="who">
+    <div class="reveal">
+      <span class="section-label">Who It's For</span>
+      <h2 class="section-heading">Every kind of <em>circle</em></h2>
+      <p style="color: var(--text-muted); max-width: 560px; font-size: 0.98rem; line-height: 1.8;">Men's Group is the infrastructure. The purpose is yours. If you lead a community, or wish you belonged to one, this was built for you. Already leading one? <a href="#lead" style="color: inherit; text-decoration: underline; text-underline-offset: 3px;">Partner with us</a>.</p>
+    </div>
+    <div class="who-grid">
+      <div class="who-card reveal reveal-delay-1">
+        <h4>Faith-Based Groups</h4>
+        <p>Bible studies, prayer circles, and men's ministries that meet weekly and go deeper than Sunday.</p>
+      </div>
+      <div class="who-card reveal reveal-delay-1">
+        <h4>Fitness Crews</h4>
+        <p>Running clubs, lifting partners, and training groups that keep every man honest about showing up.</p>
+      </div>
+      <div class="who-card reveal reveal-delay-2">
+        <h4>Book Clubs</h4>
+        <p>Read together, finish together, and actually apply what you read, with curated recommendations built in.</p>
+      </div>
+      <div class="who-card reveal reveal-delay-2">
+        <h4>Veteran Circles</h4>
+        <p>Brotherhood after service. Structured, consistent, and built on showing up for the men beside you.</p>
+      </div>
+      <div class="who-card reveal reveal-delay-3">
+        <h4>Professional Networks</h4>
+        <p>Career accountability, a built-in job board, and men who open doors for one another.</p>
+      </div>
+      <div class="who-card reveal reveal-delay-3">
+        <h4>Accountability Circles</h4>
+        <p>Any group of men with goals and the guts to be held to them. Start one. We'll handle the rest.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA / WAITLIST -->
+  <section class="full-width final-cta" id="waitlist">
+    <div class="section-inner reveal">
+      <span class="section-label">Founding Members</span>
+      <h2 class="section-heading">Be first in the <em>room</em></h2>
+      <p style="color: var(--text-muted); font-size: 0.98rem; line-height: 1.8;">Join the waitlist and get first access when Men's Group launches on iOS and Android, plus founding-member status in the community you help start.</p>
+      <div class="capture-row" id="footer-capture-row">
+        <input type="email" placeholder="your@email.com" id="footer-email" />
+        <button onclick="joinWaitlist('footer')">Join the Waitlist</button>
+      </div>
+      <div class="post-signup" id="footer-post-signup" style="margin-top: 2.25rem;"></div>
+      <p class="final-note">Know a man who needs this? The best groups start with one invitation.</p>
+    </div>
+  </section>
+
+  <!-- START A GROUP / BRING IT TO YOUR COMMUNITY -->
+  <section class="full-width lead-section" id="lead">
+    <div class="section-inner">
+      <div class="lead-grid">
+        <div class="reveal">
+          <span class="section-label">Start a Group</span>
+          <h2 class="section-heading">Lead the group you <em>wish existed</em></h2>
+          <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 2rem;">Every great group starts with one man willing to host it. Whether you lead a church ministry, run a gym, organize veterans, or simply want to gather the men around you, tell us about your community, and we will help you launch as a founding host.</p>
+          <div style="font-size: 0.9rem; color: var(--text-muted);"><span style="color: var(--accent); font-size: 0.8rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-right: 0.75rem;">Email</span>hello@socialnexus.group</div>
+        </div>
+        <form class="contact-form reveal reveal-delay-2" onsubmit="handleLead(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label>First Name</label>
+              <input type="text" placeholder="First name" />
+            </div>
+            <div class="form-group">
+              <label>Last Name</label>
+              <input type="text" placeholder="Last name" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Email Address <span style="color: var(--accent); font-weight: 400; text-transform: none; letter-spacing: 0;">(required)</span></label>
+            <input type="email" placeholder="you@yourorganization.com" required />
+          </div>
+          <div class="form-group">
+            <label>Community Type <span style="color: var(--accent); font-weight: 400; text-transform: none; letter-spacing: 0;">(required)</span></label>
+            <select required>
+              <option value="" disabled selected>Select one...</option>
+              <option>Church</option>
+              <option>Faith-Based Organization</option>
+              <option>Fitness Community</option>
+              <option>Veterans Group</option>
+              <option>Professional Network</option>
+              <option>Book Club</option>
+              <option>Individual Host</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Organization Name</label>
+            <input type="text" placeholder="e.g. Your Organization" />
+          </div>
+          <div class="form-group">
+            <label>Message</label>
+            <textarea placeholder="Tell us about the group you want to start..."></textarea>
+          </div>
+          <button type="submit" class="lead-submit" id="lead-btn">Send Message</button>
+          <div class="lead-success" id="lead-success">✓ Message received. We'll be in touch shortly.</div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOWNLOAD SECTION — hidden until launch. Set APP_LAUNCHED = true in the script below to activate. -->
+  <section class="full-width download-section" id="download">
+    <div class="section-inner">
+      <span class="section-label">Get the App</span>
+      <h2 class="section-heading">Men's Group is <em>live</em></h2>
+      <p style="color: var(--text-muted); font-size: 0.98rem;">Download now on iOS and Android, or scan the code with your phone.</p>
+      <div class="store-badges">
+        <!-- Replace href values with real store URLs at launch -->
+        <a class="store-badge" href="#" id="ios-link">
+          <span style="font-size:1.5rem;"></span>
+          <span class="sb-label"><span class="sb-small">Download on the</span><span class="sb-big">App Store</span></span>
+        </a>
+        <a class="store-badge" href="#" id="android-link">
+          <span style="font-size:1.35rem;">▶</span>
+          <span class="sb-label"><span class="sb-small">Get it on</span><span class="sb-big">Google Play</span></span>
+        </a>
+      </div>
+      <!-- QR: at launch, generate a QR for the smart deep link (e.g., via onelink/branch or a static QR to socialnexus.group/mg-app redirect) and replace this slot with the image -->
+      <div class="qr-slot">QR code (add at launch)</div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <a href="index.html" class="footer-logo">Social<span>Nexus</span></a>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="womens-group.html">Women's Group</a>
+        <a href="#lead">Start a Group</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+      </div>
+      <span class="footer-copy">© 2025-2026 Social Nexus LLC, Arizona</span>
+    </div>
+  </footer>
+
+  <!-- Supabase client -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    // ── Launch switch ─────────────────────────────────────────────
+    // At launch: set to true → waitlist sections hide, download section shows.
+    const APP_LAUNCHED = false;
+
+    // ── Supabase (same project + table as the homepage) ──────────
+    const SUPABASE_URL = 'https://ccdxrriaaosbsgqxyrnu.supabase.co';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNjZHhycmlhYW9zYnNncXh5cm51Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg4MTc0ODEsImV4cCI6MjA5NDM5MzQ4MX0.7YiHWi5-0KhtZE5bbdlGcNuANOCnhfUjFKGycpQykfQ';
+    let snClient = null;
+    try { snClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY); }
+    catch (e) { console.error('Supabase client failed to load:', e); }
+    const SOURCE = 'mens_group_launch';
+    const APP_NAME = "Men's Group";
+    const SHARE_TEXT = "I just joined the waitlist for Men's Group, an app for real, in-person men's groups. Thought of you: ";
+    const PAGE_URL = 'https://socialnexus.group/mens-group';
+    const SEGMENTS = ['Faith-based', 'Fitness', 'Book club', 'Veterans', 'Professional', 'Just looking'];
+
+    let signedUpEmail = null;
+
+    if (APP_LAUNCHED) {
+      document.querySelectorAll('.hero-capture, #waitlist').forEach(el => el.style.display = 'none');
+      document.getElementById('download').style.display = 'block';
+      document.querySelector('.nav-cta').textContent = 'Get the App';
+      document.querySelector('.nav-cta').setAttribute('href', '#download');
+      document.querySelector('.hero-eyebrow').textContent = 'Now available on iOS & Android';
+    }
+
+    // ── Waitlist signup ───────────────────────────────────────────
+    async function joinWaitlist(loc) {
+      const input = document.getElementById(loc + '-email');
+      const email = input.value.trim();
+      if (!email || !email.includes('@')) {
+        input.style.borderColor = '#c0392b';
+        setTimeout(() => input.style.borderColor = '', 1500);
+        return;
+      }
+
+      if (!snClient) {
+        window.location.href = 'mailto:hello@socialnexus.group?subject=' + encodeURIComponent('Waitlist: ' + APP_NAME) + '&body=' + encodeURIComponent('Please add me to the ' + APP_NAME + ' waitlist: ' + email);
+        return;
+      }
+
+      const { error } = await snClient.from('website_contacts').insert({ email, source: SOURCE });
+      let already = false;
+      if (error) {
+        if (error.code === '23505') { already = true; }
+        else {
+          console.error('Supabase error:', error.message);
+          input.style.borderColor = '#c0392b';
+          setTimeout(() => input.style.borderColor = '', 1500);
+          return;
+        }
+      }
+      signedUpEmail = email;
+      showPostSignup(loc, already);
+    }
+
+    // ── Post-signup: segmentation + share (highest-intent moment) ─
+    function showPostSignup(loc, already) {
+      document.getElementById(loc + '-capture-row').style.display = 'none';
+      const panel = document.getElementById(loc + '-post-signup');
+      panel.innerHTML = `
+        <div class="ps-check">✓ ${already ? "You're already on the list. We'll be in touch." : "You're on the list."}</div>
+        <div class="ps-note">You'll get first access when we launch. One more thing (optional):</div>
+        <div class="ps-question">What kind of group are you looking for?</div>
+        <div class="ps-chips" id="${loc}-chips">
+          ${SEGMENTS.map(s => `<button onclick="pickSegment('${loc}', '${s}', this)">${s}</button>`).join('')}
+        </div>
+        <div class="ps-share">
+          <div class="ps-share-label">The best groups start with one invitation. Know a man who needs this?</div>
+          <div class="ps-copy-row">
+            <input type="text" readonly value="${PAGE_URL}" id="${loc}-copy-url" onclick="this.select()" />
+            <button onclick="copyLink('${loc}', this)">Copy Link</button>
+          </div>
+          <div class="ps-share-buttons">${shareButtons()}</div>
+        </div>`;
+      panel.style.display = 'block';
+    }
+
+    async function pickSegment(loc, segment, btn) {
+      document.querySelectorAll('#' + loc + '-chips button').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      // Best-effort enrichment of the waitlist row. Requires an RLS policy
+      // allowing anon UPDATE of community_type on website_contacts.
+      try {
+        await snClient.from('website_contacts')
+          .update({ community_type: segment })
+          .eq('email', signedUpEmail)
+          .eq('source', SOURCE);
+      } catch (e) { /* non-blocking */ }
+    }
+
+    const EMAIL_SUBJECT = "You'd like this: Men's Group";
+
+    function shareButtons() {
+      const msg = encodeURIComponent(SHARE_TEXT + PAGE_URL);
+      let btns = '';
+      if (navigator.share) {
+        btns += '<button onclick="nativeShare()">Share...</button>';
+      }
+      btns += '<a href="https://wa.me/?text=' + msg + '" target="_blank" rel="noopener">WhatsApp</a>';
+      btns += '<a href="sms:?&body=' + msg + '">Text</a>';
+      btns += '<a href="mailto:?subject=' + encodeURIComponent(EMAIL_SUBJECT) + '&body=' + msg + '">Email</a>';
+      return btns;
+    }
+
+    async function nativeShare() {
+      try { await navigator.share({ title: APP_NAME, text: SHARE_TEXT, url: PAGE_URL }); } catch (e) { /* cancelled */ }
+    }
+
+    async function copyLink(loc, btn) {
+      const input = document.getElementById(loc + '-copy-url');
+      try {
+        await navigator.clipboard.writeText(PAGE_URL);
+      } catch (e) {
+        input.focus(); input.select();
+        document.execCommand('copy');
+      }
+      btn.textContent = '✓ Copied';
+      setTimeout(() => { btn.textContent = 'Copy Link'; }, 2000);
+    }
+
+
+    // ── Start a Group / community form (same Supabase + Resend flow as the homepage) ──
+    async function handleLead(e) {
+      e.preventDefault();
+      const btn = document.getElementById('lead-btn');
+      const success = document.getElementById('lead-success');
+      const form = e.target;
+      const inputs = form.querySelectorAll('input, select, textarea');
+      const firstName = inputs[0].value.trim();
+      const lastName  = inputs[1].value.trim();
+      const email     = inputs[2].value.trim();
+      const communityType = inputs[3].value.trim();
+      const orgName   = inputs[4].value.trim();
+      let message     = inputs[5].value.trim();
+      const attribution = "[Submitted from the Men's Group page]";
+      message = message ? message + "\n\n" + attribution : attribution;
+
+      if (!snClient) {
+        window.location.href = 'mailto:hello@socialnexus.group?subject=' + encodeURIComponent("Start a Group: Men's Group") + '&body=' + encodeURIComponent(message + '\nFrom: ' + firstName + ' ' + lastName + ' <' + email + '>');
+        return;
+      }
+
+      btn.textContent = 'Sending...';
+      btn.disabled = true;
+
+      const { error } = await snClient.from('website_contacts').insert({
+        first_name:        firstName,
+        last_name:         lastName,
+        email:             email,
+        community_type:    communityType,
+        organization_name: orgName || null,
+        message:           message,
+        source:            'partner_inquiry'
+      });
+
+      if (error) {
+        if (error.code === '23505') {
+          btn.style.display = 'none';
+          success.textContent = "✓ We already have your inquiry. We'll be in touch.";
+          success.style.display = 'block';
+          return;
+        }
+        console.error('Supabase error:', error.message);
+        btn.textContent = 'Send Message';
+        btn.disabled = false;
+        alert('Something went wrong. Please try again or email us directly at hello@socialnexus.group');
+        return;
+      }
+
+      btn.style.display = 'none';
+      success.style.display = 'block';
+      form.reset();
+    }
+
+    // ── Nav scroll effect ─────────────────────────────────────────
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60));
+
+    // ── Scroll reveal ─────────────────────────────────────────────
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => observer.observe(el));
+
+    // ── Smooth scroll ─────────────────────────────────────────────
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+      });
+    });
+  </script>
+</body>
+</html>

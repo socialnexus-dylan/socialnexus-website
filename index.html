@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Social Nexus — Building Community That Lasts</title>
+  <title>Social Nexus | Building Community That Lasts</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -472,6 +472,26 @@
       margin-bottom: 2rem;
     }
 
+    .app-card-link {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--amber);
+      text-decoration: none;
+      margin-bottom: 2rem;
+      transition: color 0.2s;
+    }
+
+    .app-card-link span {
+      display: inline-block;
+      transition: transform 0.2s;
+    }
+
+    .app-card-link:hover { color: var(--amber-light); }
+    .app-card-link:hover span { transform: translateX(4px); }
+
     .email-capture {
       display: flex;
       flex-direction: column;
@@ -804,7 +824,8 @@
     <a href="#" class="nav-logo">Social<span>Nexus</span></a>
     <ul class="nav-links">
       <li><a href="#mission">Mission</a></li>
-      <li><a href="#apps">Our Apps</a></li>
+      <li><a href="mens-group.html">Men's Group</a></li>
+      <li><a href="womens-group.html">Women's Group</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
@@ -812,9 +833,9 @@
   <!-- HERO -->
   <div class="hero" id="home">
     <div class="hero-bg-glow"></div>
-    <span class="hero-eyebrow">Social Nexus — Est. 2025</span>
+    <span class="hero-eyebrow">Social Nexus · Est. 2025</span>
     <h1>Where <em>Real</em> Connections<br>Are Built</h1>
-    <p class="hero-sub">We bring people together in real life — forming meaningful communities, pursuing personal growth, and showing up for one another.<br>Mobile apps are how we make it happen.</p>
+    <p class="hero-sub">We bring people together in real life, forming meaningful communities, pursuing personal growth, and showing up for one another.<br>Mobile apps are how we make it happen.</p>
     <div class="hero-cta-group">
       <a href="#apps" class="btn-primary">Explore Our Apps</a>
       <a href="#contact" class="btn-outline">Get In Touch</a>
@@ -834,8 +855,8 @@
         <span class="section-label">Our Mission</span>
         <h2 class="section-heading">Community is one of life's greatest<em> gifts</em></h2>
         <div class="mission-body">
-          <p>At Social Nexus, we believe that the quality of your life is shaped by the quality of your relationships. Belonging to a group of people who know you, challenge you, and celebrate you — in person, face to face — that is something worth building toward.</p>
-          <p>Communities deserve the structure and tools to truly thrive — and that is exactly what we build toward. The technology is the foundation, but the real magic happens when people actually show up for one another. From faith-based groups and fitness crews to book clubs, accountability circles, and professional networks — the goal is always the same: people, together, in real life.</p>
+          <p>At Social Nexus, we believe that the quality of your life is shaped by the quality of your relationships. Belonging to a group of people who know you, challenge you, and celebrate you, in person and face to face, is something worth building toward.</p>
+          <p>Communities deserve the structure and tools to truly thrive, and that is exactly what we build toward. The technology is the foundation, but the real magic happens when people actually show up for one another. From faith-based groups and fitness crews to book clubs, accountability circles, and professional networks, the goal is always the same: people, together, in real life.</p>
           <p>One belief grounds everything we do: intentional, real-world human connection makes everything better.</p>
         </div>
       </div>
@@ -843,17 +864,17 @@
         <div class="stat-item">
           <div class="stat-number">30M+</div>
           <div class="stat-label">Adults in the US motivated to participate in intentional community groups<sup>1</sup></div>
-          <div class="stat-source">Pew Research Center (2024) & U.S. Census Bureau — derived estimate based on population and group participation data</div>
+          <div class="stat-source">Pew Research Center (2024) & U.S. Census Bureau. Derived estimate based on population and group participation data</div>
         </div>
         <div class="stat-item">
           <div class="stat-number">50%</div>
           <div class="stat-label">Greater likelihood of living longer for people with strong social connections<sup>2</sup></div>
-          <div class="stat-source">Harvard T.H. Chan School of Public Health — also cited by the U.S. Surgeon General's Advisory on Social Connection, 2023</div>
+          <div class="stat-source">Harvard T.H. Chan School of Public Health. Also cited by the U.S. Surgeon General's Advisory on Social Connection, 2023</div>
         </div>
         <div class="stat-item">
           <div class="stat-number">½</div>
           <div class="stat-label">The number of Americans with 6 or more close friends has fallen by half since 1990<sup>3</sup></div>
-          <div class="stat-source">American Perspectives Survey, Survey Center on American Life — 2021</div>
+          <div class="stat-source">American Perspectives Survey, Survey Center on American Life, 2021</div>
         </div>
       </div>
     </div>
@@ -861,15 +882,15 @@
     <div class="values-grid">
       <div class="value-item reveal reveal-delay-1">
         <h4>Belonging</h4>
-        <p>Everyone deserves a group of people who truly know them — and who show up in person. We build the infrastructure that makes real-world belonging possible, for everyone.</p>
+        <p>Everyone deserves a group of people who truly know them, and who show up in person. We build the infrastructure that makes real-world belonging possible, for everyone.</p>
       </div>
       <div class="value-item reveal reveal-delay-2">
         <h4>Authenticity</h4>
-        <p>Real relationships, not curated performance. The space to show up exactly as you are — no filters, no highlights reel, just people being genuine with one another.</p>
+        <p>Real relationships, not curated performance. The space to show up exactly as you are: no filters, no highlights reel, just people being genuine with one another.</p>
       </div>
       <div class="value-item reveal reveal-delay-3">
         <h4>Accountability</h4>
-        <p>Growth happens in community. Real accountability means someone showing up when you say you will — and calling you out, with care, when you don't. That kind of relationship changes people.</p>
+        <p>Growth happens in community. Real accountability means someone showing up when you say you will, and calling you out, with care, when you don't. That kind of relationship changes people.</p>
       </div>
     </div>
   </section>
@@ -882,7 +903,7 @@
       <div class="apps-header reveal">
         <span class="section-label">Our Portfolio</span>
         <h2 class="section-heading">Apps Built for <em>Real</em> People</h2>
-        <p style="color: var(--cream-muted); max-width: 520px; margin: 0 auto; font-size: 0.95rem; line-height: 1.8;">Each Social Nexus app is purpose-built for a specific community — designed to get people off their screens and into the same room. Be the first to know when they launch.</p>
+        <p style="color: var(--cream-muted); max-width: 520px; margin: 0 auto; font-size: 0.95rem; line-height: 1.8;">Each Social Nexus app is purpose-built for a specific community, designed to get people off their screens and into the same room. Be the first to know when they launch.</p>
       </div>
 
       <div class="apps-grid">
@@ -891,8 +912,9 @@
         <div class="app-card reveal reveal-delay-1">
           <span class="app-card-badge">Coming Soon</span>
           <div class="app-icon">⚡</div>
-          <h3>Men's Group</h3>
-          <p>Your community of men — faith-based groups, fitness crews, book clubs, veteran circles, and professional networks. Real in-person meetings, shared goals, mutual accountability. Show up. Grow together.</p>
+          <h3><a href="mens-group.html" style="color: inherit; text-decoration: none;">Men's Group</a></h3>
+          <p>Your community of men: faith-based groups, fitness crews, book clubs, veteran circles, and professional networks. Real in-person meetings, shared goals, mutual accountability. Show up. Grow together.</p>
+          <a href="mens-group.html" class="app-card-link">Explore Men's Group <span>→</span></a>
           <div class="email-capture">
             <span class="email-capture-label">Notify me at launch</span>
             <div class="email-capture-row">
@@ -907,8 +929,9 @@
         <div class="app-card reveal reveal-delay-2">
           <span class="app-card-badge">Coming Soon</span>
           <div class="app-icon">✦</div>
-          <h3>Women's Group</h3>
-          <p>A sacred and supportive space for women to connect, share, and grow together — built for faith communities, book clubs, wellness groups, professional circles, and beyond. From shared goals to in-person gatherings, every feature is designed to bring women closer in real life.</p>
+          <h3><a href="womens-group.html" style="color: inherit; text-decoration: none;">Women's Group</a></h3>
+          <p>A sacred and supportive space for women to connect, share, and grow together, built for faith communities, book clubs, wellness groups, professional circles, and beyond. From shared goals to in-person gatherings, every feature is designed to bring women closer in real life.</p>
+          <a href="womens-group.html" class="app-card-link">Explore Women's Group <span>→</span></a>
           <div class="email-capture">
             <span class="email-capture-label">Notify me at launch</span>
             <div class="email-capture-row">
@@ -1003,13 +1026,14 @@
     <div class="footer-inner">
       <a href="#" class="footer-logo">Social<span>Nexus</span></a>
       <div class="footer-links">
+        <a href="mens-group.html">Men's Group</a>
+        <a href="womens-group.html">Women's Group</a>
         <a href="#">Privacy Policy</a>
         <a href="#">Terms of Service</a>
         <a href="#">Community Guidelines</a>
-        <a href="#apps">Our Apps</a>
         <a href="#contact">Contact</a>
       </div>
-      <span class="footer-copy">© 2025 Social Nexus LLC — Arizona</span>
+      <span class="footer-copy">© 2025-2026 Social Nexus LLC, Arizona</span>
     </div>
   </footer>
 
@@ -1063,7 +1087,7 @@
           // Duplicate email for this source
           input.style.display = 'none';
           input.nextElementSibling.style.display = 'none';
-          success.textContent = "✓ You're already on the list — we'll be in touch.";
+          success.textContent = "✓ You're already on the list. We'll be in touch.";
           success.style.display = 'block';
         } else {
           console.error('Supabase error:', error.message);
