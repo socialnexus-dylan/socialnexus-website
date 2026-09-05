@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terms of Service | Social Nexus</title>
+  <meta name="description" content="Terms of Service for Social Nexus, Men's Group, and Women's Group." />
+  <link rel="canonical" href="https://socialnexus.group/terms" />
+  <script data-cfasync="false">document.documentElement.classList.add('js');</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #111008;
+      --bg-warm: #18160d;
+      --bg-card: #1e1b10;
+      --cream: #f2ead8;
+      --cream-muted: #b8ae96;
+      --amber: #c9943a;
+      --amber-light: #e0b060;
+      --amber-dim: rgba(201, 148, 58, 0.12);
+      --border: rgba(242, 234, 216, 0.08);
+      --border-amber: rgba(201, 148, 58, 0.25);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--cream);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 100;
+      opacity: 0.4;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      padding: 1.5rem 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(to bottom, rgba(17,16,8,0.95) 0%, transparent 100%);
+      backdrop-filter: blur(0px);
+      transition: backdrop-filter 0.3s;
+    }
+
+    nav.scrolled {
+      backdrop-filter: blur(16px);
+      background: rgba(17,16,8,0.9);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Fraunces', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--cream);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+
+    .nav-logo span {
+      color: var(--amber);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--cream-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--cream); }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      padding: 0;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: var(--cream);
+      transition: transform 0.25s, opacity 0.25s;
+    }
+
+    .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+
+    .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .btn-primary {
+      background: var(--amber);
+      color: var(--bg);
+      padding: 0.85rem 2rem;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      min-width: 200px;
+      text-align: center;
+    }
+
+    .btn-primary:hover {
+      background: var(--amber-light);
+      transform: translateY(-1px);
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 1.25rem;
+      display: block;
+    }
+
+    .section-heading {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2rem, 4vw, 3.25rem);
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-heading em {
+      font-style: italic;
+      color: var(--amber-light);
+    }
+
+    .success-msg {
+      display: none;
+      font-size: 0.85rem;
+      color: var(--amber-light);
+      padding: 0.5rem 0;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .form-group label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--cream-muted);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: rgba(242,234,216,0.04);
+      border: 1px solid var(--border);
+      padding: 0.85rem 1rem;
+      color: var(--cream);
+      font-family: 'Jost', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 300;
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: rgba(184,174,150,0.35);
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--amber);
+    }
+
+    .form-group select {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c9943a' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      padding-right: 2.5rem;
+    }
+
+    .form-group select option {
+      background: var(--bg-card);
+      color: var(--cream);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    footer {
+      background: var(--bg-warm);
+      border-top: 1px solid var(--border);
+      padding: 3rem 4rem;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .footer-logo {
+      font-family: 'Fraunces', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--cream);
+      text-decoration: none;
+    }
+
+    .footer-logo span { color: var(--amber); }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      font-size: 0.8rem;
+      color: var(--cream-muted);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--cream); }
+
+    .footer-copy {
+      font-size: 0.78rem;
+      color: rgba(184,174,150,0.4);
+      letter-spacing: 0.03em;
+    }
+
+    html.js .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    html.js .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+
+    .reveal-delay-2 { transition-delay: 0.2s; }
+
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    @media (min-width: 901px) {
+      .btn-primary, .btn-outline { width: 220px; }
+    }
+
+    @media (max-width: 900px) {
+      nav { padding: 1.25rem 2rem; }
+      .nav-toggle { display: flex; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        gap: 0;
+        background: rgba(17,16,8,0.98);
+        backdrop-filter: blur(16px);
+        border-bottom: 1px solid var(--border);
+        padding: 0.25rem 2rem 1rem;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links li { border-top: 1px solid var(--border); }
+      .nav-links li:first-child { border-top: none; }
+      .nav-links a { display: block; padding: 0.95rem 0; font-size: 0.9rem; }
+      .form-row { grid-template-columns: 1fr; }
+      footer { padding: 2.5rem 2rem; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+    }
+
+    .page-head { padding: 11rem 4rem 2.5rem; max-width: 1000px; margin: 0 auto; }
+    .page-head h1 {
+      font-family: 'Fraunces', serif; font-weight: 300;
+      font-size: clamp(2.1rem, 4.6vw, 3.4rem); line-height: 1.12;
+      letter-spacing: -0.02em; margin-bottom: 1rem;
+    }
+    .page-head .updated {
+      font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--cream-muted);
+    }
+
+    .legal-wrap {
+      max-width: 1000px; margin: 0 auto; padding: 0 4rem 6rem;
+      display: grid; grid-template-columns: 220px 1fr; gap: 4rem; align-items: start;
+    }
+
+    .toc { position: sticky; top: 7rem; }
+    .toc-title {
+      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--amber); margin-bottom: 1rem;
+    }
+    .toc ol { list-style: none; counter-reset: toc; }
+    .toc li { counter-increment: toc; margin-bottom: 0.5rem; }
+    .toc a {
+      font-size: 0.82rem; color: var(--cream-muted); text-decoration: none;
+      line-height: 1.45; display: block; transition: color 0.2s ease;
+    }
+    .toc a:hover { color: var(--amber-light); }
+
+    .legal-body { min-width: 0; }
+    .legal-body h2 {
+      font-family: 'Fraunces', serif; font-weight: 400;
+      font-size: 1.4rem; letter-spacing: -0.01em; color: var(--cream);
+      margin: 3rem 0 1rem; scroll-margin-top: 7rem;
+    }
+    .legal-body h2:first-child { margin-top: 0; }
+    .legal-body h3 {
+      font-family: 'Jost', sans-serif; font-weight: 500; font-size: 1rem;
+      letter-spacing: 0.02em; color: var(--cream);
+      margin: 2rem 0 0.75rem; scroll-margin-top: 7rem;
+    }
+    .legal-body p { color: var(--cream-muted); margin-bottom: 1.05rem; max-width: 70ch; }
+    .legal-body a { color: var(--amber-light); text-decoration: none; border-bottom: 1px solid var(--border-amber); }
+    .legal-body a:hover { color: var(--amber); }
+    .legal-body strong { color: var(--cream); font-weight: 500; }
+    .legal-body .underline { text-decoration: none; color: var(--cream); font-weight: 500; letter-spacing: 0.02em; }
+    .legal-body ul, .legal-body ol { list-style: none; margin: 0 0 1.4rem; max-width: 70ch; }
+    .legal-body li { color: var(--cream-muted); padding: 0.34rem 0 0.34rem 1.5rem; position: relative; }
+    .legal-body li p { margin: 0; }
+    .legal-body ul > li::before {
+      content: ''; position: absolute; left: 0; top: 1rem;
+      width: 5px; height: 5px; border-radius: 50%; background: var(--amber);
+    }
+    .legal-body ol { counter-reset: li; }
+    .legal-body ol > li { counter-increment: li; }
+    .legal-body ol > li::before {
+      content: counter(li) '.'; position: absolute; left: 0; top: 0.34rem;
+      color: var(--amber); font-size: 0.85rem;
+    }
+
+    @media (max-width: 900px) {
+      .page-head { padding: 8.5rem 2rem 2rem; }
+      .legal-wrap { grid-template-columns: 1fr; gap: 2.5rem; padding: 0 2rem 4rem; }
+      .toc { position: static; border-bottom: 1px solid var(--border); padding-bottom: 1.5rem; }
+      .toc ol { columns: 2; column-gap: 1.5rem; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <nav id="nav">
+    <a href="/" class="nav-logo">Social<span>Nexus</span></a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/mens-group">Men's Group</a></li>
+      <li><a href="/womens-group">Women's Group</a></li>
+      <li><a href="/support">Support</a></li>
+    </ul>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <header class="page-head">
+    <span class="section-label">Legal</span>
+    <h1>Terms of Service</h1>
+    <p class="updated">Last Updated: September 4th, 2026</p>
+  </header>
+
+  <div class="legal-wrap">
+    <aside class="toc">
+      <div class="toc-title">Contents</div>
+      <ol>
+        <li><a href="#introduction-and-acceptance-of-terms">Introduction and Acceptance of Terms</a></li>
+        <li><a href="#eligibility">Eligibility</a></li>
+        <li><a href="#account-registration-and-security">Account Registration and Security</a></li>
+        <li><a href="#user-content">User Content</a></li>
+        <li><a href="#prohibited-conduct">Prohibited Conduct</a></li>
+        <li><a href="#intellectual-property">Intellectual Property</a></li>
+        <li><a href="#third-party-services">Third-Party Services</a></li>
+        <li><a href="#in-person-events-and-assumption-of-risk">In-Person Events and Assumption of Risk</a></li>
+        <li><a href="#termination">Termination</a></li>
+        <li><a href="#no-warranty">No Warranty</a></li>
+        <li><a href="#limitation-of-liability">Limitation of Liability</a></li>
+        <li><a href="#indemnification">Indemnification</a></li>
+        <li><a href="#dispute-resolution">Dispute Resolution</a></li>
+        <li><a href="#governing-law">Governing Law</a></li>
+        <li><a href="#general-provisions">General Provisions</a></li>
+        <li><a href="#changes-to-these-terms">Changes to These Terms</a></li>
+        <li><a href="#contact-us">Contact Us</a></li>
+      </ol>
+    </aside>
+    <main class="legal-body">
+      <h2 id="introduction-and-acceptance-of-terms">1. Introduction and Acceptance of Terms</h2>
+      <p>Welcome to Social Nexus. Social Nexus is a group of platforms that exist to support meaningful, real-world groups—such as churches and other faith communities, book clubs, fitness communities, and accountability circles—as members build stronger connections and work toward personal and shared goals. These Terms of Service ("Terms") constitute a legally binding agreement between you and Social Nexus, LLC, an Arizona limited liability company ("Social Nexus," "we," "us," or "our"). These Terms govern your access to and use of the Social Nexus mobile applications, any platform owned and operated by Social Nexus, and any related services (collectively, the "Apps").</p>
+      <p>By creating an account, using the Apps or visiting our website www.socialnexus.group, you agree to be bound by these Terms, our <a href="/privacy">Privacy Policy</a>, and our <a href="/guidelines">Community Guidelines</a>, which are incorporated herein by reference. If you do not agree to these Terms, do not use the Apps.</p>
+      <h2 id="eligibility">2. Eligibility</h2>
+      <p>The Apps are intended for users who are at least 18 years of age. By using the Apps, you represent and warrant that you are at least 18 years old. If you are under 18, you represent that you have your parent's or legal guardian's permission to use the Apps and that they have read and agree to these Terms on your behalf.</p>
+      <p>We reserve the right to request verification of age at any time and to terminate accounts if we have reason to believe a user does not meet the eligibility requirements.</p>
+      <h2 id="account-registration-and-security">3. Account Registration and Security</h2>
+      <p>To use certain features of the Apps, you must create an account. When you register, you agree to provide accurate, current, and complete information, including your name, username, and email address.</p>
+      <p>You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account. You agree to notify us immediately at <a href="mailto:support&#64;socialnexus.group">support&#64;socialnexus.group</a> if you become aware of any unauthorized access to or use of your account.</p>
+      <p>We reserve the right to disable any account at any time in our sole discretion, with or without cause or notice.</p>
+      <h2 id="user-content">4. User Content</h2>
+      <h3 id="your-content">4.1 Your Content</h3>
+      <p>The Apps allow you to post, submit, and share content, including but not limited to group information, event details, personal goals, and other materials ("User Content"). You are solely responsible for your User Content and the consequences of posting it.</p>
+      <p>By posting User Content, you represent and warrant that:</p>
+      <ul>
+      <li><p>You own or have the necessary rights and permissions to use and authorize us to use your User Content as described in these Terms;</p></li>
+      <li><p>Your User Content does not violate the privacy rights, publicity rights, intellectual property rights, or other rights of any person or entity; and</p></li>
+      <li><p>Your User Content complies with these Terms, our Community Guidelines, and all applicable laws.</p></li>
+      </ul>
+      <h3 id="license-to-user-content">4.2 License to User Content</h3>
+      <p>You retain ownership of your User Content. However, by posting User Content to the Apps, you grant Social Nexus a non-exclusive, worldwide, perpetual, irrevocable, royalty-free, sublicensable, and transferable license to use, reproduce, modify, adapt, publish, translate, create derivative works from, distribute, publicly perform, and publicly display your User Content in connection with operating, improving, and promoting the Apps.</p>
+      <p>This license continues even if you stop using the Apps or delete your account, to the extent your User Content has been shared with others, incorporated into the Apps, or as reasonably necessary for Social Nexus to continue operating the Apps.</p>
+      <h3 id="removal-of-user-content">4.3 Removal of User Content</h3>
+      <p>We reserve the right to monitor, review, or remove User Content at our sole discretion, for any reason or no reason, including User Content that we believe violates these Terms or our Community Guidelines.</p>
+      <h2 id="prohibited-conduct">5. Prohibited Conduct</h2>
+      <p>You agree not to engage in any of the following prohibited activities:</p>
+      <ul>
+      <li><p>Violating our <a href="/guidelines">Community Guidelines</a>;</p></li>
+      <li><p>Using the Apps for any illegal purpose or in violation of any applicable law or regulation;</p></li>
+      <li><p>Harassing, threatening, intimidating, or bullying other users;</p></li>
+      <li><p>Impersonating any person or entity or falsely stating or misrepresenting your affiliation with a person or entity;</p></li>
+      <li><p>Posting content that is defamatory, obscene, pornographic, violent, hateful, or otherwise objectionable;</p></li>
+      <li><p>Posting content that infringes the intellectual property or other rights of any third party;</p></li>
+      <li><p>Attempting to gain unauthorized access to the Apps, other user accounts, or any computer systems or networks connected to the Apps;</p></li>
+      <li><p>Interfering with or disrupting the App or servers or networks connected to the Apps;</p></li>
+      <li><p>Using any automated means, including bots, scrapers, or spiders, to access the Apps or collect data from the Apps;</p></li>
+      <li><p>Transmitting any viruses, malware, or other harmful code;</p></li>
+      <li><p>Using the Apps to send spam or unsolicited communications;</p></li>
+      <li><p>Recruiting for multi-level marketing, pyramid schemes, or similar programs;</p></li>
+      <li><p>Circumventing any measures we use to restrict access to the Apps, including creating new accounts after being banned; or</p></li>
+      <li><p>Encouraging or facilitating any of the foregoing.</p></li>
+      </ul>
+      <h2 id="intellectual-property">6. Intellectual Property</h2>
+      <h3 id="social-nexus-intellectual-property">6.1 Social Nexus Intellectual Property</h3>
+      <p>The Apps and their entire contents, features, and functionality, including but not limited to all text, graphics, logos, icons, images, software, and the design, selection, and arrangement thereof, are owned by Social Nexus or its licensors and are protected by United States and international copyright, trademark, and other intellectual property laws.</p>
+      <p>Subject to your compliance with these Terms, we grant you a limited, non-exclusive, non-transferable, non-sublicensable, revocable license to access and use the Apps for your personal, non-commercial use. This license does not include the right to:</p>
+      <ul>
+      <li><p>Modify, copy, or create derivative works based on the Apps;</p></li>
+      <li><p>Reverse engineer, disassemble, or decompile the Apps;</p></li>
+      <li><p>Remove any copyright, trademark, or other proprietary notices from the Apps; or</p></li>
+      <li><p>Transfer, sell, or sublicense your rights under this license.</p></li>
+      </ul>
+      <h3 id="feedback">6.2 Feedback</h3>
+      <p>If you provide us with any feedback, suggestions, or ideas regarding the Apps ("Feedback"), you grant us a perpetual, irrevocable, worldwide, royalty-free license to use, modify, and incorporate such Feedback into the Apps without any obligation to compensate you.</p>
+      <p><strong>6.3</strong> <strong>Copyright Protection</strong></p>
+      <p>We respond to notices of alleged copyright infringement and terminate accounts of repeat infringers according to the process set out in the U.S. Digital Millennium Copyright Act. If you think somebody is violating your copyrights and want to notify us, please send an email to <a href="mailto:legal&#64;socialnexus.group">legal&#64;socialnexus.group</a>.</p>
+      <h2 id="third-party-services">7. Third-Party Services</h2>
+      <p>The Apps are built using third-party development and hosting services. The Apps may also contain links to third-party websites or services that are not owned or controlled by Social Nexus.</p>
+      <p>You can find a list of our current third party services in our Privacy Policy.</p>
+      <p>We have no control over, and assume no responsibility for, the content, privacy policies, or practices of any third-party websites or services. You acknowledge and agree that Social Nexus shall not be responsible or liable, directly or indirectly, for any damage or loss caused or alleged to be caused by or in connection with the use of or reliance on any such third-party content, goods, or services.</p>
+      <h2 id="in-person-events-and-assumption-of-risk">8. In-Person Events and Assumption of Risk</h2>
+      <p>The Apps enable users to organize and coordinate in-person events and activities. Social Nexus does not organize, host, or supervise these events and has no control over what occurs at them.</p>
+      <p><strong>You acknowledge and agree that participation in any in-person event or activity coordinated through the Apps carries inherent risks, including but not limited to the risk of illness, bodily injury, disability, property damage, or death.</strong> By participating in any such event, you voluntarily assume all risks associated with your participation, whether known or unknown.</p>
+      <p>To the fullest extent permitted by applicable law, you hereby release, waive, and discharge Social Nexus and its officers, directors, members, managers, employees, agents, and affiliates from any and all claims, demands, damages, losses, liabilities, costs, and expenses (including attorneys' fees) arising out of or in connection with your participation in any in-person event or activity coordinated through the Apps, including claims based on the negligence of Social Nexus or any other released party.</p>
+      <p>You agree to exercise good judgment and take appropriate precautions when attending events, including meeting in public places, informing others of your whereabouts, and trusting your instincts if a situation feels unsafe.</p>
+      <h2 id="termination">9. Termination</h2>
+      <p>We may suspend or terminate your account and access to the Apps at any time, in our sole discretion, with or without cause or notice. Upon termination, your right to use the Apps will immediately cease.</p>
+      <p>You may terminate your account at any time by deleting your account through the Apps or by contacting us at <a href="mailto:support&#64;socialnexus.group">support&#64;socialnexus.group</a>.</p>
+      <p>The following sections shall survive any termination of these Terms: Section 4.2 (License to User Content), Section 6 (Intellectual Property), Section 8 (In-Person Events and Assumption of Risk), Section 10 (Disclaimer of Warranties), Section 11 (Limitation of Liability), Section 12 (Indemnification), Section 13 (Dispute Resolution), and Section 15 (General Provisions).</p>
+      <h2 id="no-warranty">10. No Warranty</h2>
+      <p>THE APPS ARE PROVIDED ON AN "AS IS" AND "AS AVAILABLE" BASIS, WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED. TO THE FULLEST EXTENT PERMITTED BY APPLICABLE LAW, SOCIAL NEXUS DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, AND NON-INFRINGEMENT.</p>
+      <p>SOCIAL NEXUS DOES NOT WARRANT THAT THE APPS WILL BE UNINTERRUPTED, SECURE, OR ERROR-FREE, THAT DEFECTS WILL BE CORRECTED, OR THAT THE APPS OR THE SERVERS THAT MAKE THEM AVAILABLE ARE FREE OF VIRUSES OR OTHER HARMFUL COMPONENTS.</p>
+      <p>SOCIAL NEXUS MAKES NO WARRANTIES OR REPRESENTATIONS ABOUT THE ACCURACY, RELIABILITY, COMPLETENESS, OR TIMELINESS OF ANY CONTENT POSTED ON THE APPS, INCLUDING USER CONTENT, OR THE RESULTS THAT MAY BE OBTAINED FROM USE OF THE APPS.</p>
+      <p>YOUR USE OF THE APPS IS AT YOUR OWN RISK. SOME JURISDICTIONS DO NOT ALLOW THE EXCLUSION OF CERTAIN WARRANTIES, SO SOME OF THE ABOVE EXCLUSIONS MAY NOT APPLY TO YOU.</p>
+      <h2 id="limitation-of-liability">11. Limitation of Liability</h2>
+      <p>TO THE FULLEST EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL SOCIAL NEXUS OR ITS OFFICERS, DIRECTORS, MEMBERS, MANAGERS, EMPLOYEES, AGENTS, OR AFFILIATES BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, COVER, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING BUT NOT LIMITED TO DAMAGES FOR LOSS OF PROFITS, GOODWILL, USE, DATA, OR OTHER INTANGIBLE LOSSES, ARISING OUT OF OR IN CONNECTION WITH:</p>
+      <ul>
+      <li><p>YOUR ACCESS TO OR USE OF, OR INABILITY TO ACCESS OR USE, THE APPS;</p></li>
+      <li><p>ANY CONDUCT OR CONTENT OF ANY THIRD PARTY ON THE APPS, INCLUDING ANY DEFAMATORY, OFFENSIVE, OR ILLEGAL CONDUCT OF OTHER USERS OR THIRD PARTIES;</p></li>
+      <li><p>ANY USER CONTENT OR OTHER CONTENT OBTAINED FROM THE APPS;</p></li>
+      <li><p>YOUR PARTICIPATION IN ANY IN-PERSON EVENT OR ACTIVITY COORDINATED THROUGH THE APPS; OR</p></li>
+      <li><p>UNAUTHORIZED ACCESS, USE, OR ALTERATION OF YOUR TRANSMISSIONS OR CONTENT.</p></li>
+      </ul>
+      <p>TO THE FULLEST EXTENT PERMITTED BY APPLICABLE LAW, THE TOTAL LIABILITY OF SOCIAL NEXUS AND ITS OFFICERS, DIRECTORS, MEMBERS, MANAGERS, EMPLOYEES, AGENTS, AND AFFILIATES FOR ANY CLAIMS ARISING OUT OF OR RELATING TO THESE TERMS OR YOUR USE OF THE APPS SHALL NOT EXCEED ONE HUNDRED DOLLARS ($100).</p>
+      <p>THE LIMITATIONS OF THIS SECTION SHALL APPLY TO ANY THEORY OF LIABILITY, INCLUDING, WITHOUT LIMITATION, WARRANTY, CONTRACT, STATUTE, TORT, NEGLIGENCE, AND WHETHER OR NOT SOCIAL NEXUS HAS BEEN INFORMED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
+      <p>SOME JURISDICTIONS DO NOT ALLOW THE EXCLUSION OR LIMITATION OF LIABILITY FOR CONSEQUENTIAL OR INCIDENTAL DAMAGES, SO THE ABOVE LIMITATION MAY NOT APPLY TO YOU.</p>
+      <p>You acknowledge that the foregoing limitations are an essential element of the agreement between you and Social Nexus and that in the absence of such limitations the terms and conditions set forth in these Terms would be substantially different.</p>
+      <h2 id="indemnification">12. Indemnification</h2>
+      <p>You agree to indemnify, defend, and hold harmless Social Nexus and its officers, directors, members, managers, employees, agents, and affiliates from and against any and all claims, demands, damages, losses, liabilities, costs, and expenses (including reasonable attorneys' fees) arising out of or in connection with:</p>
+      <ul>
+      <li><p>Your use of the Apps;</p></li>
+      <li><p>Your User Content;</p></li>
+      <li><p>Your violation of these Terms or any applicable law or regulation;</p></li>
+      <li><p>Your violation of any rights of any third party; or</p></li>
+      <li><p>Your participation in any in-person event or activity coordinated through the Apps.</p></li>
+      </ul>
+      <p>Social Nexus reserves the right, at your expense, to assume the exclusive defense and control of any matter for which you are required to indemnify us, and you agree to cooperate with our defense of such claims.</p>
+      <h2 id="dispute-resolution">13. Dispute Resolution</h2>
+      <h3 id="informal-resolution">13.1 Informal Resolution</h3>
+      <p>Before initiating any formal dispute resolution proceeding, you agree to first contact us at <a href="mailto:legal&#64;socialnexus.group">legal&#64;socialnexus.group</a> and attempt to resolve any dispute informally. We will attempt to resolve the dispute by contacting you via email. If a dispute is not resolved within thirty (30) days of submission, either party may proceed to binding arbitration as set forth below.</p>
+      <h3 id="binding-arbitration">13.2 Binding Arbitration</h3>
+      <p><strong>You and Social Nexus agree that any dispute, claim, or controversy arising out of or relating to these Terms or your use of the Apps (collectively, "Disputes") will be resolved exclusively through final and binding arbitration, rather than in court, except that either party may bring an individual action in small claims court if the claim qualifies.</strong></p>
+      <p>The arbitration will be administered by JAMS pursuant to its Streamlined Arbitration Rules and Procedures, as modified by this Section 13. The arbitration will be conducted by a single arbitrator selected in accordance with the JAMS rules. The arbitration will be held in Maricopa County, Arizona, unless you and Social Nexus agree otherwise or the arbitrator determines that such location would pose an undue hardship.</p>
+      <p>The arbitrator shall have exclusive authority to resolve all Disputes, including any claim that all or any part of these Terms is void or voidable. The arbitrator's award shall be final and binding, and judgment on the award may be entered in any court of competent jurisdiction.</p>
+      <p>You understand that by agreeing to arbitration, you are waiving your right to a jury trial and to participate in a class action.</p>
+      <h3 id="class-action-waiver">13.3 Class Action Waiver</h3>
+      <p><strong>YOU AND SOCIAL NEXUS AGREE THAT EACH PARTY MAY BRING DISPUTES AGAINST THE OTHER ONLY IN AN INDIVIDUAL CAPACITY AND NOT AS A PLAINTIFF OR CLASS MEMBER IN ANY PURPORTED CLASS, COLLECTIVE, OR REPRESENTATIVE PROCEEDING.</strong> Unless both you and Social Nexus agree otherwise, the arbitrator may not consolidate or join more than one person's claims and may not otherwise preside over any form of a consolidated, representative, or class proceeding.</p>
+      <p>Any claim that all or part of this Class Action Waiver is unenforceable, unconscionable, void, or voidable may be determined only by a court of competent jurisdiction and not by an arbitrator. The parties understand that any right to litigate in court, to have a judge or jury decide their case, or to be a party to a class or representative action, is waived, and that any claims must be decided individually, through arbitration.</p>
+      <h3 id="opt-out">13.4 Opt-Out</h3>
+      <p>You may opt out of this arbitration agreement by sending written notice to <a href="mailto:legal@socialnexus.group"><u>legal@socialnexus.group</u></a> within thirty (30) days of first accepting these Terms. Your notice must include your name, mailing address, email address associated with your account, and a clear statement that you wish to opt out of this arbitration agreement. If you opt out, the remaining provisions of these Terms will continue to apply.</p>
+      <h2 id="governing-law">14. Governing Law</h2>
+      <p>These Terms and any Dispute arising out of or relating to these Terms or your use of the Apps shall be governed by and construed in accordance with the laws of the State of Arizona, without regard to its conflict of law principles.</p>
+      <p>If the arbitration agreement in Section 13 is found not to apply to you or your Dispute, or if you opt out of arbitration, you agree that any judicial proceeding (other than small claims actions) must be brought exclusively in the state or federal courts located in Maricopa County, Arizona, and you consent to the personal jurisdiction and venue of such courts.</p>
+      <h2 id="general-provisions">15. General Provisions</h2>
+      <h3 id="entire-agreement">15.1 Entire Agreement</h3>
+      <p>These Terms, together with the <a href="/privacy">Privacy Policy</a> and <a href="/guidelines">Community Guidelines</a>, constitute the entire agreement between you and Social Nexus regarding your use of the Apps and supersede all prior agreements and understandings, whether written or oral.</p>
+      <h3 id="severability">15.2 Severability</h3>
+      <p>If any provision of these Terms is held to be invalid, illegal, or unenforceable, the remaining provisions shall continue in full force and effect. The invalid, illegal, or unenforceable provision shall be modified to the minimum extent necessary to make it valid, legal, and enforceable while preserving the parties' original intent.</p>
+      <h3 id="waiver">15.3 Waiver</h3>
+      <p>The failure of Social Nexus to enforce any right or provision of these Terms shall not constitute a waiver of such right or provision. Any waiver of any provision of these Terms will be effective only if in writing and signed by Social Nexus.</p>
+      <h3 id="assignment">15.4 Assignment</h3>
+      <p>You may not assign or transfer these Terms or your rights or obligations hereunder without the prior written consent of Social Nexus. Social Nexus may assign or transfer these Terms, in whole or in part, without restriction. Subject to the foregoing, these Terms will bind and inure to the benefit of the parties and their respective successors and permitted assigns.</p>
+      <h3 id="notices">15.5 Notices</h3>
+      <p>We may provide notices to you via email to the address associated with your account or by posting notices within the Apps. You are responsible for keeping your email address current. Notices sent by email will be deemed received when sent. Notices posted within the Apps will be deemed received when posted.</p>
+      <h3 id="headings">15.6 Headings</h3>
+      <p>The section headings in these Terms are for convenience only and have no legal or contractual effect.</p>
+      <h2 id="changes-to-these-terms">16. Changes to These Terms</h2>
+      <p>We may update these Terms from time to time. If we make material changes, we will notify you by posting the updated Terms in the Apps and updating the "Last Updated" date above. We may also notify you by email. Your continued use of the Apps after any changes constitutes your acceptance of the updated Terms. If you do not agree to the updated Terms, you must stop using the Apps.</p>
+      <h2 id="contact-us">17. Contact Us</h2>
+      <p>If you have any questions about these Terms, please contact us at:</p>
+      <p>Social Nexus, LLC, <a href="mailto:legal&#64;socialnexus.group">legal&#64;socialnexus.group</a></p>
+    </main>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <a href="/" class="footer-logo">Social<span>Nexus</span></a>
+      <div class="footer-links">
+        <a href="/">Home</a>
+        <a href="/mens-group">Men's Group</a>
+        <a href="/womens-group">Women's Group</a>
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/terms">Terms of Service</a>
+        <a href="/guidelines">Community Guidelines</a>
+        <a href="/support">Support</a>
+      </div>
+      <span class="footer-copy">&copy; 2025-2026 Social Nexus LLC, Arizona</span>
+    </div>
+  </footer>
+
+  <script data-cfasync="false">
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60));
+    const navToggle = document.getElementById('nav-toggle');
+    const navLinks  = document.getElementById('nav-links');
+    navToggle.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('open');
+      navToggle.classList.toggle('open', open);
+      navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  </script>
+</body>
+</html>

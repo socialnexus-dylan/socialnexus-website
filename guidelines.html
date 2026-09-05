@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Community Guidelines | Social Nexus</title>
+  <meta name="description" content="What is expected, what is not allowed, and how enforcement works in Social Nexus groups." />
+  <link rel="canonical" href="https://socialnexus.group/guidelines" />
+  <script data-cfasync="false">document.documentElement.classList.add('js');</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #111008;
+      --bg-warm: #18160d;
+      --bg-card: #1e1b10;
+      --cream: #f2ead8;
+      --cream-muted: #b8ae96;
+      --amber: #c9943a;
+      --amber-light: #e0b060;
+      --amber-dim: rgba(201, 148, 58, 0.12);
+      --border: rgba(242, 234, 216, 0.08);
+      --border-amber: rgba(201, 148, 58, 0.25);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--cream);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 100;
+      opacity: 0.4;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      padding: 1.5rem 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(to bottom, rgba(17,16,8,0.95) 0%, transparent 100%);
+      backdrop-filter: blur(0px);
+      transition: backdrop-filter 0.3s;
+    }
+
+    nav.scrolled {
+      backdrop-filter: blur(16px);
+      background: rgba(17,16,8,0.9);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Fraunces', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--cream);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+
+    .nav-logo span {
+      color: var(--amber);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--cream-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--cream); }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      padding: 0;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: var(--cream);
+      transition: transform 0.25s, opacity 0.25s;
+    }
+
+    .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+
+    .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .btn-primary {
+      background: var(--amber);
+      color: var(--bg);
+      padding: 0.85rem 2rem;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      min-width: 200px;
+      text-align: center;
+    }
+
+    .btn-primary:hover {
+      background: var(--amber-light);
+      transform: translateY(-1px);
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 1.25rem;
+      display: block;
+    }
+
+    .section-heading {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2rem, 4vw, 3.25rem);
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-heading em {
+      font-style: italic;
+      color: var(--amber-light);
+    }
+
+    .success-msg {
+      display: none;
+      font-size: 0.85rem;
+      color: var(--amber-light);
+      padding: 0.5rem 0;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .form-group label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--cream-muted);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: rgba(242,234,216,0.04);
+      border: 1px solid var(--border);
+      padding: 0.85rem 1rem;
+      color: var(--cream);
+      font-family: 'Jost', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 300;
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: rgba(184,174,150,0.35);
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--amber);
+    }
+
+    .form-group select {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c9943a' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      padding-right: 2.5rem;
+    }
+
+    .form-group select option {
+      background: var(--bg-card);
+      color: var(--cream);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    footer {
+      background: var(--bg-warm);
+      border-top: 1px solid var(--border);
+      padding: 3rem 4rem;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .footer-logo {
+      font-family: 'Fraunces', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--cream);
+      text-decoration: none;
+    }
+
+    .footer-logo span { color: var(--amber); }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      font-size: 0.8rem;
+      color: var(--cream-muted);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--cream); }
+
+    .footer-copy {
+      font-size: 0.78rem;
+      color: rgba(184,174,150,0.4);
+      letter-spacing: 0.03em;
+    }
+
+    html.js .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    html.js .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+
+    .reveal-delay-2 { transition-delay: 0.2s; }
+
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    @media (min-width: 901px) {
+      .btn-primary, .btn-outline { width: 220px; }
+    }
+
+    @media (max-width: 900px) {
+      nav { padding: 1.25rem 2rem; }
+      .nav-toggle { display: flex; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        gap: 0;
+        background: rgba(17,16,8,0.98);
+        backdrop-filter: blur(16px);
+        border-bottom: 1px solid var(--border);
+        padding: 0.25rem 2rem 1rem;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links li { border-top: 1px solid var(--border); }
+      .nav-links li:first-child { border-top: none; }
+      .nav-links a { display: block; padding: 0.95rem 0; font-size: 0.9rem; }
+      .form-row { grid-template-columns: 1fr; }
+      footer { padding: 2.5rem 2rem; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+    }
+
+    .page-head { padding: 11rem 4rem 2.5rem; max-width: 1000px; margin: 0 auto; }
+    .page-head h1 {
+      font-family: 'Fraunces', serif; font-weight: 300;
+      font-size: clamp(2.1rem, 4.6vw, 3.4rem); line-height: 1.12;
+      letter-spacing: -0.02em; margin-bottom: 1rem;
+    }
+    .page-head .updated {
+      font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--cream-muted);
+    }
+
+    .legal-wrap {
+      max-width: 1000px; margin: 0 auto; padding: 0 4rem 6rem;
+      display: grid; grid-template-columns: 220px 1fr; gap: 4rem; align-items: start;
+    }
+
+    .toc { position: sticky; top: 7rem; }
+    .toc-title {
+      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--amber); margin-bottom: 1rem;
+    }
+    .toc ol { list-style: none; counter-reset: toc; }
+    .toc li { counter-increment: toc; margin-bottom: 0.5rem; }
+    .toc a {
+      font-size: 0.82rem; color: var(--cream-muted); text-decoration: none;
+      line-height: 1.45; display: block; transition: color 0.2s ease;
+    }
+    .toc a:hover { color: var(--amber-light); }
+
+    .legal-body { min-width: 0; }
+    .legal-body h2 {
+      font-family: 'Fraunces', serif; font-weight: 400;
+      font-size: 1.4rem; letter-spacing: -0.01em; color: var(--cream);
+      margin: 3rem 0 1rem; scroll-margin-top: 7rem;
+    }
+    .legal-body h2:first-child { margin-top: 0; }
+    .legal-body h3 {
+      font-family: 'Jost', sans-serif; font-weight: 500; font-size: 1rem;
+      letter-spacing: 0.02em; color: var(--cream);
+      margin: 2rem 0 0.75rem; scroll-margin-top: 7rem;
+    }
+    .legal-body p { color: var(--cream-muted); margin-bottom: 1.05rem; max-width: 70ch; }
+    .legal-body a { color: var(--amber-light); text-decoration: none; border-bottom: 1px solid var(--border-amber); }
+    .legal-body a:hover { color: var(--amber); }
+    .legal-body strong { color: var(--cream); font-weight: 500; }
+    .legal-body .underline { text-decoration: none; color: var(--cream); font-weight: 500; letter-spacing: 0.02em; }
+    .legal-body ul, .legal-body ol { list-style: none; margin: 0 0 1.4rem; max-width: 70ch; }
+    .legal-body li { color: var(--cream-muted); padding: 0.34rem 0 0.34rem 1.5rem; position: relative; }
+    .legal-body li p { margin: 0; }
+    .legal-body ul > li::before {
+      content: ''; position: absolute; left: 0; top: 1rem;
+      width: 5px; height: 5px; border-radius: 50%; background: var(--amber);
+    }
+    .legal-body ol { counter-reset: li; }
+    .legal-body ol > li { counter-increment: li; }
+    .legal-body ol > li::before {
+      content: counter(li) '.'; position: absolute; left: 0; top: 0.34rem;
+      color: var(--amber); font-size: 0.85rem;
+    }
+
+    @media (max-width: 900px) {
+      .page-head { padding: 8.5rem 2rem 2rem; }
+      .legal-wrap { grid-template-columns: 1fr; gap: 2.5rem; padding: 0 2rem 4rem; }
+      .toc { position: static; border-bottom: 1px solid var(--border); padding-bottom: 1.5rem; }
+      .toc ol { columns: 2; column-gap: 1.5rem; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <nav id="nav">
+    <a href="/" class="nav-logo">Social<span>Nexus</span></a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/mens-group">Men's Group</a></li>
+      <li><a href="/womens-group">Women's Group</a></li>
+      <li><a href="/support">Support</a></li>
+    </ul>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <header class="page-head">
+    <span class="section-label">Legal</span>
+    <h1>Community Guidelines</h1>
+    <p class="updated">Last Updated: September 4th, 2026</p>
+  </header>
+
+  <div class="legal-wrap">
+    <aside class="toc">
+      <div class="toc-title">Contents</div>
+      <ol>
+        <li><a href="#welcome-to-social-nexus">Welcome to Social Nexus</a></li>
+        <li><a href="#our-principles">Our Principles</a></li>
+        <li><a href="#what-we-expect">What We Expect</a></li>
+        <li><a href="#whats-not-allowed">What's Not Allowed</a></li>
+        <li><a href="#self-harm-concerns">Self Harm Concerns</a></li>
+        <li><a href="#reporting-concerns">Reporting Concerns</a></li>
+        <li><a href="#enforcement">Enforcement</a></li>
+        <li><a href="#a-note-on-in-person-events">A Note on In-Person Events</a></li>
+        <li><a href="#questions">Questions?</a></li>
+      </ol>
+    </aside>
+    <main class="legal-body">
+      <h2 id="welcome-to-social-nexus">Welcome to Social Nexus</h2>
+      <p>Social Nexus platforms exist to support meaningful, real-world groups—such as churches and other faith communities, book clubs, fitness communities, and accountability circles—as members build stronger connections and work toward personal and shared goals. These guidelines help us maintain a space where everyone feels safe, respected, and supported.</p>
+      <p>These Community Guidelines cover all platforms owned and operated by Social Nexus. By using Social Nexus platforms, you agree to follow these guidelines. They apply to all interactions on the platform, including groups, events, goals, messaging, and any future features.</p>
+      <h2 id="our-principles">Our Principles</h2>
+      <p><em>Be Authentic</em>. Use your real identity. Be honest about who you are and what you're looking for.</p>
+      <p><em>Be Respectful.</em> Treat others the way you'd want to be treated, even when you disagree.</p>
+      <p><em>Be Supportive</em>. We're here to help each other grow. Lift people up.</p>
+      <p><em>Be Safe</em>. Look out for yourself and others. If something feels wrong, say something.</p>
+      <h2 id="what-we-expect">What We Expect</h2>
+      <ul>
+      <li><blockquote>
+      <p>Show up as yourself. Your profile should represent the real you.</p>
+      </blockquote></li>
+      <li><blockquote>
+      <p>Respect group boundaries. Follow the norms set by group hosts. If a group isn't the right fit, find or create one that is.</p>
+      </blockquote></li>
+      <li><blockquote>
+      <p>Honor commitments. If you RSVP to an event, do your best to attend, or change your RSVP beforehand.</p>
+      </blockquote></li>
+      <li><blockquote>
+      <p>Keep personal information private. Don't share other members' contact details, locations, or personal information without their permission.</p>
+      </blockquote></li>
+      <li><blockquote>
+      <p>At in-person events, respect personal space, ask before taking photos of others, and follow any guidelines set by the host.</p>
+      </blockquote></li>
+      </ul>
+      <h2 id="whats-not-allowed">What's Not Allowed</h2>
+      <p>The following conduct is prohibited on any platform owned or operated by Social Nexus. Violations may result in a warning, suspension, or permanent ban depending on the severity and whether it's repeat behavior.</p>
+      <h3 id="dishonesty-deception">Dishonesty &amp; Deception</h3>
+      <ul>
+      <li><blockquote>
+      <p>Creating fake accounts or impersonating another person</p>
+      </blockquote></li>
+      <li><blockquote>
+      <p>Misrepresenting your intentions, affiliations, or identity</p>
+      </blockquote></li>
+      <li><blockquote>
+      <p>Providing false information in your profile</p>
+      </blockquote></li>
+      </ul>
+      <h3 id="harassment-harmful-behavior">Harassment &amp; Harmful Behavior</h3>
+      <ul>
+      <li><blockquote>
+      <p>Bullying, intimidation, or personal attacks</p>
+      </blockquote></li>
+      <li><blockquote>
+      <p>Unwelcome, repeated, or aggressive contact after someone has asked you to stop</p>
+      </blockquote></li>
+      <li><blockquote>
+      <p>Stalking or following someone (online or in person)</p>
+      </blockquote></li>
+      <li><blockquote>
+      <p>Threats of violence or language intended to intimidate</p>
+      </blockquote></li>
+      <li><blockquote>
+      <p>Posting content designed to shame, embarrass, or humiliate someone</p>
+      </blockquote></li>
+      </ul>
+      <h3 id="hate-discrimination">Hate &amp; Discrimination</h3>
+      <ul>
+      <li><blockquote>
+      <p>Hate speech or content that attacks individuals or groups based on race, ethnicity, religion, gender, sexual orientation, disability, or other protected characteristics</p>
+      </blockquote></li>
+      <li><blockquote>
+      <p>Promoting supremacist ideologies or inciting hatred or violence</p>
+      </blockquote></li>
+      </ul>
+      <h3 id="inappropriate-content">Inappropriate Content</h3>
+      <ul>
+      <li><blockquote>
+      <p>Sexually explicit material, nudity, or pornography</p>
+      </blockquote></li>
+      <li><blockquote>
+      <p>Graphic violence or disturbing imagery</p>
+      </blockquote></li>
+      <li><blockquote>
+      <p>Content that promotes self-harm or eating disorders</p>
+      </blockquote></li>
+      </ul>
+      <h3 id="spam-solicitation-and-exploitation">Spam, Solicitation and Exploitation</h3>
+      <ul>
+      <li><blockquote>
+      <p>Recruiting for multi-level marketing (MLM), pyramid schemes, or similar business models</p>
+      </blockquote></li>
+      <li><blockquote>
+      <p>Repeatedly posting irrelevant or off-topic content</p>
+      </blockquote></li>
+      <li><blockquote>
+      <p>Scams, fraud, or deceptive schemes</p>
+      </blockquote></li>
+      </ul>
+      <h3 id="privacy-violations">Privacy Violations</h3>
+      <ul>
+      <li><blockquote>
+      <p>Sharing someone else's personal information (includes name, email, phone number, address, financial info, etc.) without their consent</p>
+      </blockquote></li>
+      <li><blockquote>
+      <p>Recording or photographing others at events without permission</p>
+      </blockquote></li>
+      </ul>
+      <h3 id="illegal-activity">Illegal Activity</h3>
+      <ul>
+      <li><blockquote>
+      <p>Using Social Nexus platforms to plan, promote, or engage in illegal activity of any kind</p>
+      </blockquote></li>
+      <li><blockquote>
+      <p>Soliciting or facilitating prostitution or sex trafficking</p>
+      </blockquote></li>
+      </ul>
+      <h3 id="harmful-misinformation">Harmful Misinformation</h3>
+      <ul>
+      <li><blockquote>
+      <p>Spreading false information that could endanger health or safety</p>
+      </blockquote></li>
+      </ul>
+      <h3 id="child-safety">Child Safety</h3>
+      <ul>
+      <li><blockquote>
+      <p>Any content that sexualizes, exploits, or endangers minors is strictly prohibited and will be reported to authorities</p>
+      </blockquote></li>
+      </ul>
+      <h3 id="undermining-the-platform">Undermining the Platform</h3>
+      <ul>
+      <li><blockquote>
+      <p>Circumventing a ban or block by creating new accounts</p>
+      </blockquote></li>
+      <li><blockquote>
+      <p>Interfering with the operation of groups or the platform</p>
+      </blockquote></li>
+      <li><blockquote>
+      <p>Attempting to access accounts or data that don't belong to you</p>
+      </blockquote></li>
+      </ul>
+      <h2 id="self-harm-concerns">Self Harm Concerns</h2>
+      <p>While Social Nexus platforms are a place for our users to connect and support each other, it is not a place for the kind of help that trained mental health professionals provide. If you see posts or messages that make you think someone might be in danger or thinking about hurting themselves, please let us know at <a href="mailto:support&#64;socialnexus.group">support&#64;socialnexus.group</a>. If there is immediate danger, contact emergency services right away. If you are having thoughts of suicide or self harm, please call <u>988</u>.</p>
+      <h2 id="reporting-concerns">Reporting Concerns</h2>
+      <p>If you experience or witness behavior that violates these guidelines, please report it using the "Report" feature in the app or by emailing us at <a href="mailto:support&#64;socialnexus.group">support&#64;socialnexus.group</a>.</p>
+      <p>When you submit a report, please include:</p>
+      <ul>
+      <li><blockquote>
+      <p>A description of what happened</p>
+      </blockquote></li>
+      <li><blockquote>
+      <p>The username(s) of the person(s) involved</p>
+      </blockquote></li>
+      <li><blockquote>
+      <p>Any relevant screenshots or details</p>
+      </blockquote></li>
+      </ul>
+      <p>We review all reports and will respond as in a timely manner. Your report will be kept confidential to the extent we're able.</p>
+      <h2 id="enforcement">Enforcement</h2>
+      <p>We take violations seriously. Depending on the nature and severity of the conduct and whether the same user has engaged in similar behavior before, we may take the following actions:</p>
+      <ul>
+      <li><blockquote>
+      <p>Warning: A notice that the behavior violates our guidelines, with a request to stop.</p>
+      </blockquote></li>
+      <li><blockquote>
+      <p>Temporary Suspension: Your account may be suspended for a period of time.</p>
+      </blockquote></li>
+      <li><blockquote>
+      <p>Permanent Ban: Your account may be permanently removed from any Social Nexus platform.</p>
+      </blockquote></li>
+      </ul>
+      <p>We reserve the right to remove content or accounts at our discretion to protect the safety and integrity of our community.</p>
+      <h2 id="a-note-on-in-person-events">A Note on In-Person Events</h2>
+      <p>Social Nexus platforms help you coordinate real-world gatherings. While we can set expectations for online behavior, we can't control what happens offline. Use good judgment, meet in public places when getting to know new people, and trust your instincts. If something doesn't feel right, it probably isn't.</p>
+      <h2 id="questions">Questions?</h2>
+      <p>If you have questions about these guidelines or want to report a concern, contact us at <a href="mailto:legal&#64;socialnexus.group">legal&#64;socialnexus.group</a>.</p>
+    </main>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <a href="/" class="footer-logo">Social<span>Nexus</span></a>
+      <div class="footer-links">
+        <a href="/">Home</a>
+        <a href="/mens-group">Men's Group</a>
+        <a href="/womens-group">Women's Group</a>
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/terms">Terms of Service</a>
+        <a href="/guidelines">Community Guidelines</a>
+        <a href="/support">Support</a>
+      </div>
+      <span class="footer-copy">&copy; 2025-2026 Social Nexus LLC, Arizona</span>
+    </div>
+  </footer>
+
+  <script data-cfasync="false">
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60));
+    const navToggle = document.getElementById('nav-toggle');
+    const navLinks  = document.getElementById('nav-links');
+    navToggle.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('open');
+      navToggle.classList.toggle('open', open);
+      navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  </script>
+</body>
+</html>

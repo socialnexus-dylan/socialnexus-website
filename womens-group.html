@@ -367,7 +367,7 @@
     .ps-tabbar { display: flex; justify-content: space-around; background: var(--p-tabbar); border-top: 1px solid var(--p-border); padding: 0.7rem 0 0.9rem; margin-top: 0.45rem; }
     .ps-tab { font-size: 0.54rem; color: var(--p-tab-muted); text-align: center; letter-spacing: 0.03em; position: relative; }
     .ps-tab.active { color: var(--p-tab-active); }
-    .ps-tab i { display: block; width: 14px; height: 14px; border: 1.5px solid currentColor; border-radius: 4px; margin: 0 auto 3px; font-style: normal; }
+    .ps-tab svg { display: block; width: 15px; height: 15px; margin: 0 auto 4px; }
     .ps-tab .ps-badge-dot { position: absolute; top: -5px; right: -2px; background: #C96A4A; color: #fff; font-size: 0.42rem; font-weight: 700; width: 11px; height: 11px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
     .preview-note { margin-top: 1.5rem; font-size: 0.78rem; color: var(--text-muted); font-style: italic; }
 
@@ -604,8 +604,8 @@
             <p>One calendar for everything your group does, so gatherings actually happen.</p>
           </li>
           <li>
-            <h4>The Nexus</h4>
-            <p>A job board and curated book recommendations, because a strong circle opens doors and nourishes minds.</p>
+            <h4>The Bookshelf</h4>
+            <p>Curated books in two tracks. Group Reads give your circle the same thing to work through and talk about when you gather. Individual Reads are for your own time, spanning faith, personal growth, career, and family.</p>
           </li>
         </ul>
         <p class="preview-note">Available in light and dark mode, previewed here in light. Screens are design templates; the finished app may differ.</p>
@@ -659,11 +659,11 @@
               </div>
             </div>
             <div class="ps-tabbar">
-              <div class="ps-tab"><i></i>Goals</div>
-              <div class="ps-tab active"><i></i>Groups</div>
-              <div class="ps-tab"><i></i>Calendar</div>
-              <div class="ps-tab"><i></i>Inbox<span class="ps-badge-dot">4</span></div>
-              <div class="ps-tab"><i></i>Nexus</div>
+              <div class="ps-tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"/></svg>Goals</div>
+              <div class="ps-tab active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="9.5" cy="7.5" r="3.6"/><path d="M3 20c0-3.6 2.9-6.5 6.5-6.5S16 16.4 16 20"/><path d="M16.6 4.6a3.6 3.6 0 0 1 0 6.9"/><path d="M18.4 14.2c1.9 1.1 3.1 3.2 3.1 5.6"/></svg>Groups</div>
+              <div class="ps-tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5.5" width="18" height="15.5" rx="2.6"/><path d="M3 10.5h18"/><path d="M8 3v4.2M16 3v4.2"/></svg>Calendar</div>
+              <div class="ps-tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5.5" width="18" height="13.5" rx="2.6"/><path d="M3 12.6h5l1.6 2.6h4.8l1.6-2.6h5"/></svg>Inbox<span class="ps-badge-dot">4</span></div>
+              <div class="ps-tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4.2 4.2v15.6M9 4.2v15.6M13.8 4.2v15.6"/><path d="M17.6 4.9l3.6 14.6"/></svg>Shelf</div>
             </div>
           </div>
         </div>
@@ -699,7 +699,7 @@
       </div>
       <div class="who-card reveal reveal-delay-3">
         <h4>Professional Circles</h4>
-        <p>Career support, a built-in job board, and women who open doors for one another.</p>
+        <p>Career support, shared goals, and women who open doors for one another.</p>
       </div>
       <div class="who-card reveal reveal-delay-3">
         <h4>Friendship Circles</h4>
@@ -808,8 +808,11 @@
         <a href="index.html">Home</a>
         <a href="mens-group.html">Men's Group</a>
         <a href="#lead">Start a Group</a>
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Service</a>
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/terms">Terms of Service</a>
+        <a href="/guidelines">Community Guidelines</a>
+        <a href="/support">Support</a>
+        <a href="/delete-account">Delete Account</a>
       </div>
       <span class="footer-copy">© 2025-2026 Social Nexus LLC, Arizona</span>
     </div>

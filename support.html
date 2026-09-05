@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Support | Social Nexus</title>
+  <meta name="description" content="Get help with Men's Group or Women's Group. Contact the Social Nexus support team." />
+  <link rel="canonical" href="https://socialnexus.group/support" />
+  <script data-cfasync="false">document.documentElement.classList.add('js');</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #111008;
+      --bg-warm: #18160d;
+      --bg-card: #1e1b10;
+      --cream: #f2ead8;
+      --cream-muted: #b8ae96;
+      --amber: #c9943a;
+      --amber-light: #e0b060;
+      --amber-dim: rgba(201, 148, 58, 0.12);
+      --border: rgba(242, 234, 216, 0.08);
+      --border-amber: rgba(201, 148, 58, 0.25);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--cream);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 100;
+      opacity: 0.4;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      padding: 1.5rem 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(to bottom, rgba(17,16,8,0.95) 0%, transparent 100%);
+      backdrop-filter: blur(0px);
+      transition: backdrop-filter 0.3s;
+    }
+
+    nav.scrolled {
+      backdrop-filter: blur(16px);
+      background: rgba(17,16,8,0.9);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Fraunces', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--cream);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+
+    .nav-logo span {
+      color: var(--amber);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--cream-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--cream); }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      padding: 0;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: var(--cream);
+      transition: transform 0.25s, opacity 0.25s;
+    }
+
+    .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+
+    .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .btn-primary {
+      background: var(--amber);
+      color: var(--bg);
+      padding: 0.85rem 2rem;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      min-width: 200px;
+      text-align: center;
+    }
+
+    .btn-primary:hover {
+      background: var(--amber-light);
+      transform: translateY(-1px);
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 1.25rem;
+      display: block;
+    }
+
+    .section-heading {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2rem, 4vw, 3.25rem);
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-heading em {
+      font-style: italic;
+      color: var(--amber-light);
+    }
+
+    .success-msg {
+      display: none;
+      font-size: 0.85rem;
+      color: var(--amber-light);
+      padding: 0.5rem 0;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .form-group label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--cream-muted);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: rgba(242,234,216,0.04);
+      border: 1px solid var(--border);
+      padding: 0.85rem 1rem;
+      color: var(--cream);
+      font-family: 'Jost', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 300;
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: rgba(184,174,150,0.35);
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--amber);
+    }
+
+    .form-group select {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c9943a' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      padding-right: 2.5rem;
+    }
+
+    .form-group select option {
+      background: var(--bg-card);
+      color: var(--cream);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    footer {
+      background: var(--bg-warm);
+      border-top: 1px solid var(--border);
+      padding: 3rem 4rem;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .footer-logo {
+      font-family: 'Fraunces', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--cream);
+      text-decoration: none;
+    }
+
+    .footer-logo span { color: var(--amber); }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      font-size: 0.8rem;
+      color: var(--cream-muted);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--cream); }
+
+    .footer-copy {
+      font-size: 0.78rem;
+      color: rgba(184,174,150,0.4);
+      letter-spacing: 0.03em;
+    }
+
+    html.js .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    html.js .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+
+    .reveal-delay-2 { transition-delay: 0.2s; }
+
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    @media (min-width: 901px) {
+      .btn-primary, .btn-outline { width: 220px; }
+    }
+
+    @media (max-width: 900px) {
+      nav { padding: 1.25rem 2rem; }
+      .nav-toggle { display: flex; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        gap: 0;
+        background: rgba(17,16,8,0.98);
+        backdrop-filter: blur(16px);
+        border-bottom: 1px solid var(--border);
+        padding: 0.25rem 2rem 1rem;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links li { border-top: 1px solid var(--border); }
+      .nav-links li:first-child { border-top: none; }
+      .nav-links a { display: block; padding: 0.95rem 0; font-size: 0.9rem; }
+      .form-row { grid-template-columns: 1fr; }
+      footer { padding: 2.5rem 2rem; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+    }
+
+    /* ── UTILITY PAGE LAYOUT ─────────────────────────────── */
+    .page-head { padding: 11rem 4rem 3rem; max-width: 900px; margin: 0 auto; }
+    .page-head h1 {
+      font-family: 'Fraunces', serif; font-weight: 300;
+      font-size: clamp(2.1rem, 4.6vw, 3.4rem); line-height: 1.12;
+      letter-spacing: -0.02em; margin-bottom: 1.1rem;
+    }
+    .page-head .lede { font-size: 1.05rem; color: var(--cream-muted); max-width: 62ch; }
+
+    .page-body { max-width: 900px; margin: 0 auto; padding: 0 4rem 6rem; }
+    .page-body h2 {
+      font-family: 'Fraunces', serif; font-weight: 400; font-size: 1.45rem;
+      letter-spacing: -0.01em; margin: 3rem 0 1rem; color: var(--cream);
+    }
+    .page-body h2:first-child { margin-top: 0; }
+    .page-body p { color: var(--cream-muted); margin-bottom: 1.1rem; max-width: 68ch; }
+    .page-body a { color: var(--amber-light); text-decoration: none; border-bottom: 1px solid var(--border-amber); }
+    .page-body a:hover { color: var(--amber); }
+    .page-body ul { list-style: none; margin: 0 0 1.5rem; max-width: 68ch; }
+    .page-body ul li {
+      color: var(--cream-muted); padding: 0.42rem 0 0.42rem 1.5rem;
+      position: relative;
+    }
+    .page-body ul li::before {
+      content: ''; position: absolute; left: 0; top: 1.05rem;
+      width: 5px; height: 5px; border-radius: 50%; background: var(--amber);
+    }
+
+    .steps { counter-reset: step; list-style: none; margin: 0 0 1.75rem; }
+    .steps li {
+      counter-increment: step; position: relative;
+      padding: 0.55rem 0 0.55rem 3.1rem; color: var(--cream);
+    }
+    .steps li::before {
+      content: counter(step, decimal-leading-zero);
+      position: absolute; left: 0; top: 0.6rem;
+      font-family: 'Fraunces', serif; font-size: 0.92rem;
+      color: var(--amber); letter-spacing: 0.04em;
+    }
+
+    .callout {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-left: 2px solid var(--amber); padding: 1.6rem 1.8rem;
+      margin: 2rem 0; max-width: 68ch;
+    }
+    .callout p:last-child { margin-bottom: 0; }
+    .callout .mail {
+      font-family: 'Fraunces', serif; font-size: 1.22rem;
+      color: var(--amber-light); display: inline-block; margin: 0.15rem 0 0.5rem;
+    }
+    .callout .mail a { color: inherit; border: none; }
+    .callout .mail a:hover { color: var(--amber); }
+
+    .quick-links { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 1.75rem 0 0; }
+    .quick-links a {
+      border: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      padding: 0.6rem 1.15rem; font-size: 0.82rem; letter-spacing: 0.05em;
+      text-transform: uppercase; color: var(--cream-muted); transition: all 0.25s ease;
+    }
+    .quick-links a:hover { border-color: var(--border-amber); color: var(--amber-light); }
+
+    .meta-line {
+      font-size: 0.8rem; color: rgba(184,174,150,0.5);
+      letter-spacing: 0.04em; margin-top: 3.5rem;
+      padding-top: 1.5rem; border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 900px) {
+      .page-head { padding: 8.5rem 2rem 2.5rem; }
+      .page-body { padding: 0 2rem 4rem; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <nav id="nav">
+    <a href="/" class="nav-logo">Social<span>Nexus</span></a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/mens-group">Men's Group</a></li>
+      <li><a href="/womens-group">Women's Group</a></li>
+      <li><a href="/support">Support</a></li>
+    </ul>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <header class="page-head">
+    <span class="section-label">Support</span>
+    <h1>We're here to help</h1>
+    <p class="lede">Questions, problems, bug reports, or anything that isn't working the way it should.</p>
+  </header>
+
+  <main class="page-body">
+
+    <div class="callout">
+      <p>For any question, problem, or bug report:</p>
+      <p class="mail"><a data-mail="support">support<span>&#64;</span>socialnexus.group</a></p>
+    </div>
+
+    <h2>Reporting a member, group, or piece of content</h2>
+    <p>The fastest route is the report option inside the app, which sends us the context around what happened. You can also email us at the address above. Our <a href="/guidelines">Community Guidelines</a> set out what is and isn't allowed and how enforcement works.</p>
+
+    <h2>Deleting your account</h2>
+    <p>You can delete your account at any time from Profile &rarr; Settings &rarr; Delete account. Full instructions are on the <a href="/delete-account">account deletion page</a>.</p>
+
+    <h2>Send us a message</h2>
+    <p>Prefer a form? Use this instead.</p>
+
+    <form class="contact-form" onsubmit="handleSupport(event)" style="margin-top:1.5rem; max-width:640px;">
+      <div class="form-row">
+        <div class="form-group">
+          <label>First Name</label>
+          <input type="text" placeholder="John" />
+        </div>
+        <div class="form-group">
+          <label>Last Name</label>
+          <input type="text" placeholder="Smith" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email Address <span style="color:var(--amber); font-weight:400; text-transform:none; letter-spacing:0;">(required)</span></label>
+        <input type="email" placeholder="you@example.com" required />
+      </div>
+      <div class="form-group">
+        <label>What do you need help with? <span style="color:var(--amber); font-weight:400; text-transform:none; letter-spacing:0;">(required)</span></label>
+        <select required>
+          <option value="" disabled selected>Select one...</option>
+          <option>Account or sign-in problem</option>
+          <option>Report a member, group, or content</option>
+          <option>Account deletion</option>
+          <option>Privacy or data request</option>
+          <option>Bug or something not working</option>
+          <option>Feedback or suggestion</option>
+          <option>Something else</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Which app?</label>
+        <select>
+          <option value="" disabled selected>Select one...</option>
+          <option>Men's Group</option>
+          <option>Women's Group</option>
+          <option>Not app-specific</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Message</label>
+        <textarea placeholder="Tell us what's going on..."></textarea>
+      </div>
+      <button type="submit" class="btn-primary" style="width:100%; text-align:center;" id="support-btn">Send Message</button>
+      <div class="success-msg" id="support-success" style="font-size:0.9rem;">&#10003; Message received.</div>
+    </form>
+
+    <p class="meta-line">Social Nexus LLC, Arizona &middot; Men's Group and Women's Group</p>
+
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <a href="/" class="footer-logo">Social<span>Nexus</span></a>
+      <div class="footer-links">
+        <a href="/">Home</a>
+        <a href="/mens-group">Men's Group</a>
+        <a href="/womens-group">Women's Group</a>
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/terms">Terms of Service</a>
+        <a href="/guidelines">Community Guidelines</a>
+        <a href="/support">Support</a>
+      </div>
+      <span class="footer-copy">&copy; 2025-2026 Social Nexus LLC, Arizona</span>
+    </div>
+  </footer>
+
+  <script data-cfasync="false" src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script data-cfasync="false">
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60));
+
+    const navToggle = document.getElementById('nav-toggle');
+    const navLinks  = document.getElementById('nav-links');
+    navToggle.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('open');
+      navToggle.classList.toggle('open', open);
+      navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+
+    // mailto hrefs assembled at runtime so Cloudflare email obfuscation cannot rewrite them
+    document.querySelectorAll('[data-mail]').forEach(el => {
+      el.setAttribute('href', 'mailto:' + el.getAttribute('data-mail') + '@' + 'socialnexus.group');
+    });
+
+    const SUPABASE_URL = 'https://ccdxrriaaosbsgqxyrnu.supabase.co';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNjZHhycmlhYW9zYnNncXh5cm51Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg4MTc0ODEsImV4cCI6MjA5NDM5MzQ4MX0.7YiHWi5-0KhtZE5bbdlGcNuANOCnhfUjFKGycpQykfQ';
+    const SUPPORT_EMAIL = 'support' + '@' + 'socialnexus.group';
+    let snClient = null;
+    try { snClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY); }
+    catch (e) { console.error('Supabase client failed to load:', e); }
+
+    async function handleSupport(e) {
+      e.preventDefault();
+      const btn = document.getElementById('support-btn');
+      const success = document.getElementById('support-success');
+      const form = e.target;
+      const f = form.querySelectorAll('input, select, textarea');
+      const firstName = f[0].value.trim();
+      const lastName  = f[1].value.trim();
+      const email     = f[2].value.trim();
+      const topic     = f[3].value.trim();
+      const app       = f[4].value.trim();
+      const message   = f[5].value.trim();
+
+      if (!snClient) {
+        alert('Our contact service did not load. Please email us directly at ' + SUPPORT_EMAIL);
+        return;
+      }
+
+      btn.textContent = 'Sending...';
+      btn.disabled = true;
+
+      let result;
+      try {
+        result = await snClient
+          .from('website_contacts')
+          .insert({
+            first_name:        firstName,
+            last_name:         lastName,
+            email:             email,
+            community_type:    topic,
+            organization_name: app || null,
+            message:           message || null,
+            source:            'support_request'
+          });
+      } catch (err) {
+        console.error('Network error:', err);
+        btn.textContent = 'Send Message';
+        btn.disabled = false;
+        alert('Connection problem. Please try again, or email us at ' + SUPPORT_EMAIL);
+        return;
+      }
+
+      if (result.error) {
+        console.error('Supabase error:', result.error.code, result.error.message);
+        btn.textContent = 'Send Message';
+        btn.disabled = false;
+        alert('We could not send that. Please email us directly at ' + SUPPORT_EMAIL);
+        return;
+      }
+
+      btn.style.display = 'none';
+      success.style.display = 'block';
+      form.reset();
+    }
+
+  </script>
+</body>
+</html>
