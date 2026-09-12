@@ -1,0 +1,5 @@
+# Old app page URLs -> new short URLs (301 = permanent, preserves search ranking)
+/mens-group    /mens     301
+/womens-group  /womens   301
+/mens-group.html    /mens     301
+/womens-group.html  /womens   301
